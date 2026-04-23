@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Dropdown Menu - Olova UI",
+  description: "Present grouped actions inside a compact floating menu.",
+  alternates: {
+    canonical: "/components/dropdown-menu",
+  },
+};
+
+import DropdownMenuDefaultView from "./dropdown-menu-view";
+
+# Dropdown Menu
+
+Present grouped actions inside a compact floating menu.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<DropdownMenuDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/dropdown-menu/dropdown-menu.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { DropdownMenu } from "@/app/components/dropdown-menu/dropdown-menu";
+
+export default function Example() {
+  return <DropdownMenu />;
+}
+```

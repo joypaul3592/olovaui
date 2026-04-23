@@ -1,0 +1,111 @@
+export const metadata = {
+  title: "Command Menu - Olova UI",
+  description: "A command menu component for search and quick actions.",
+  alternates: {
+    canonical: "/components/command-menu",
+  },
+};
+
+import {
+  CommandMenuDefaultView,
+  CommandMenuEmptyView,
+} from "./command-menu-view";
+
+# Command Menu
+
+A command menu component for search and quick actions.
+
+## Preview
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<CommandMenuDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/command-menu/command-menu.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  CommandMenu,
+  CommandMenuEmpty,
+  CommandMenuGroup,
+  CommandMenuInput,
+  CommandMenuItem,
+  CommandMenuList,
+  CommandMenuSeparator,
+  CommandMenuShortcut,
+} from "@/app/components/command-menu/command-menu";
+
+export default function Example() {
+  return (
+    <CommandMenu className="max-w-sm">
+      <CommandMenuInput placeholder="Type a command or search..." />
+      <CommandMenuList>
+        <CommandMenuEmpty>No results found.</CommandMenuEmpty>
+        <CommandMenuGroup heading="Suggestions">
+          <CommandMenuItem value="Calendar">Calendar</CommandMenuItem>
+          <CommandMenuItem value="Calculator">Calculator</CommandMenuItem>
+        </CommandMenuGroup>
+        <CommandMenuSeparator />
+        <CommandMenuGroup heading="Settings">
+          <CommandMenuItem
+            value="Profile"
+            rightSlot={<CommandMenuShortcut>Ctrl P</CommandMenuShortcut>}
+          >
+            Profile
+          </CommandMenuItem>
+        </CommandMenuGroup>
+      </CommandMenuList>
+    </CommandMenu>
+  );
+}
+```
+
+## Examples
+
+### Default
+
+Grouped commands with icons, separators, and shortcuts.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<CommandMenuDefaultView />} reTrigger={true} />
+  </TabsContent>
+</Tabs>
+
+### Empty State
+
+Use `CommandMenuEmpty` to show when search results are filtered out.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<CommandMenuEmptyView />} reTrigger={true} />
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+The `CommandMenu` component provides a search field and grouped actions.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | `undefined` | Controlled search query. |
+| `defaultValue` | `string` | `""` | Initial search query. |
+| `onValueChange` | `(value: string) => void` | `undefined` | Callback when search query changes. |
+| `filter` | `(value: string, search: string) => boolean` | `undefined` | Custom matching logic for filtering. |
+| `className` | `string` | `undefined` | Custom classes for the menu container. |
+| `children` | `ReactNode` | `undefined` | Content of the command menu. |

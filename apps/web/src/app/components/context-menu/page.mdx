@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Context Menu - Olova UI",
+  description: "Show quick actions from a contextual trigger surface.",
+  alternates: {
+    canonical: "/components/context-menu",
+  },
+};
+
+import ContextMenuDefaultView from "./context-menu-view";
+
+# Context Menu
+
+Show quick actions from a contextual trigger surface.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ContextMenuDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/context-menu/context-menu.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { ContextMenu } from "@/app/components/context-menu/context-menu";
+
+export default function Example() {
+  return <ContextMenu />;
+}
+```

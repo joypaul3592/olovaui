@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Skeleton - Olova UI",
+  description: "Render loading placeholders for pending content.",
+  alternates: {
+    canonical: "/components/skeleton",
+  },
+};
+
+import SkeletonDefaultView from "./skeleton-view";
+
+# Skeleton
+
+Render loading placeholders for pending content.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<SkeletonDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/skeleton/skeleton.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Skeleton } from "@/app/components/skeleton/skeleton";
+
+export default function Example() {
+  return <Skeleton />;
+}
+```

@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Tabs - Olova UI",
+  description: "Switch between related content panels.",
+  alternates: {
+    canonical: "/components/tabs",
+  },
+};
+
+import TabsDefaultView from "./tabs-view";
+
+# Tabs
+
+Switch between related content panels.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<TabsDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/tabs/tabs.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Tabs } from "@/app/components/tabs/tabs";
+
+export default function Example() {
+  return <Tabs />;
+}
+```

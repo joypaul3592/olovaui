@@ -1,0 +1,140 @@
+export const metadata = {
+  title: "Card - Olova UI",
+  description:
+    "A flexible card component with headers, actions, and content slots.",
+  alternates: {
+    canonical: "/components/card",
+  },
+};
+
+import {
+  CardDefaultView,
+  CardBasicExample,
+  CardSmallExample,
+  CardHeaderActionExample,
+  CardMediaExample,
+} from "./card-view";
+
+# Card
+
+A flexible card component with headers, actions, and content slots.
+
+## Preview
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<CardDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/card/card.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/app/components/card/card";
+import { Button } from "@/app/components/button/button";
+
+export default function Example() {
+  return (
+    <Card className="max-w-sm">
+      <CardHeader>
+        <div>
+          <CardTitle>Starter plan</CardTitle>
+          <CardDescription>Best for growing teams.</CardDescription>
+        </div>
+      </CardHeader>
+      <CardContent className="text-sm text-muted-foreground">
+        12 projects, shared folders, and priority support.
+      </CardContent>
+      <CardFooter>
+        <Button size="sm">Choose plan</Button>
+      </CardFooter>
+    </Card>
+  );
+}
+```
+
+## Examples
+
+Each section shows a single card pattern.
+
+### Basic
+
+A minimal card with title, description, and body content.
+
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<CardBasicExample />} reTrigger={true} />
+  </TabsContent>
+</Tabs>
+
+
+### Small
+
+Compact spacing using `size="sm"` and a full-width action button.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<CardSmallExample />} reTrigger={true} />
+  </TabsContent>
+</Tabs>
+
+
+
+### Header Action
+
+Use `CardAction` to place controls alongside the header content.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<CardHeaderActionExample />} reTrigger={true} />
+  </TabsContent>
+</Tabs>
+
+
+### Media
+
+Add a media block above the header for richer cards.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<CardMediaExample />} reTrigger={true} />
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+The `Card` components render semantic elements with `div`, `h3`, and `p` tags.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Controls card spacing and typography. |
+| `className` | `string` | `undefined` | Add custom classes to any card slot. |
+| `children` | `ReactNode` | `undefined` | Content of the slot component. |
+| `aria-label` | `string` | `undefined` | Accessible label for actions when needed. |

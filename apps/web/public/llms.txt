@@ -1,0 +1,235 @@
+# Olova UI - Modern React Component Library
+
+> 500+ Animated React Components | Built with Tailwind CSS & Framer Motion
+
+Olova UI is a comprehensive, production-ready React component library designed for modern web applications. First UI library from Bangladesh.
+
+## 🌐 Official Links
+
+- Website: https://olovaui.olova.net
+- Documentation: https://olovaui.olova.net/docs
+- GitHub: https://github.com/olova.net/olovaui
+- NPM: https://www.npmjs.com/package/olovaui
+- Twitter: @olovaui
+
+## ✨ Key Features
+
+- **500+ Animated Components**: Extensive collection of production-ready components
+- **Tailwind CSS 4**: Modern utility-first CSS framework
+- **Framer Motion 12**: Smooth, performant animations
+- **TypeScript 5**: Full type safety and IntelliSense
+- **React 19 & Next.js 16**: Latest React features and optimizations
+- **Dark Mode**: Built-in theme switching with next-themes
+- **Accessibility**: WCAG 2.1 compliant components
+- **Copy-Paste Ready**: No npm install required, just copy and customize
+- **Static Export**: Optimized for static site generation
+- **Performance Optimized**: Bundle size optimized, lazy loading, code splitting
+- **SEO Friendly**: Built-in SEO optimization and structured data
+- **Free & Open Source**: MIT License
+
+## 🚀 Quick Start
+
+### CLI Installation (Recommended)
+```bash
+# Using npm
+npx shadcn@latest add "https://olovaui.olova.net/registry/button.json"
+
+# Using pnpm
+pnpm dlx shadcn@latest add "https://olovaui.olova.net/registry/button.json"
+
+# Using yarn
+yarn dlx shadcn@latest add "https://olovaui.olova.net/registry/button.json"
+
+# Using bun
+bunx shadcn@latest add "https://olovaui.olova.net/registry/button.json"
+```
+
+### Manual Installation
+1. Browse components at https://olovaui.olova.net/docs
+2. Copy component code
+3. Paste into your project
+4. Customize as needed
+
+## 📦 Prerequisites
+
+```bash
+npm install tailwindcss framer-motion class-variance-authority clsx tailwind-merge lucide-react next-themes
+```
+
+## 🧩 Component Categories
+
+### UI Components (Essential)
+- Button - Interactive buttons with ripple effects, loading states, variants
+- Card - Flexible content containers with hover effects
+- Badge - Status indicators and labels
+- Tabs - Tabbed navigation with multiple styles
+- Accordion - Collapsible content sections
+- Dropdown - Dropdown menus and select components
+- Navbar - Responsive navigation bars
+- Footer - Footer sections with multiple layouts
+- Dock - macOS-style dock navigation
+- Marquee - Infinite scrolling content
+
+### Form Components
+- Login - Complete login form with validation
+- Signin - Sign-in forms with social auth
+- Password - Password input with strength indicator
+- Forgot Password - Password recovery forms
+- Two-Step - Two-factor authentication
+- Multi Selector - Advanced multi-select dropdown
+- Search - Search inputs with fuzzy search
+
+### Animation Components
+- Flip Words - Animated text flipping effects
+- Text Reveal - Text animation reveals
+- Sparkles Text - Sparkle effect text
+- Decrypting - Decryption animation effect
+- Shimmer - Shimmer loading effects
+- Loaders - Various loading animations
+- Retro - Retro-style animations
+
+### Layout Components
+- Hero - Hero sections with multiple variants
+- Pricing - Pricing tables and cards
+- Testimonial - Customer testimonials
+- Portfolio - Portfolio showcases
+- Team Member - Team member cards
+- Waitlist - Waitlist signup forms
+- File Tree - File/folder tree view
+- Masonry - Masonry grid layouts
+
+### Interactive Components
+- Carousel - Image and content carousels
+- Network - Network graph visualizations
+- Copy Button - Code copy functionality
+- Color Palette - Color picker and palette
+- Gradient - Gradient generators
+- Fuzzy - Fuzzy search interface
+- Magic - Magic cursor effects
+- Spotlight Card - Spotlight hover effects
+
+### Specialized Components
+- NFT Marketplace - NFT card designs
+- Amazon Gift - Gift card styled components
+- Code Profile - Developer profile cards
+- Pattern - Background patterns
+- Aurora - Aurora background effects
+- Integrations - Integration showcases
+- Prompt - AI prompt inputs
+
+## 💻 Tech Stack
+
+### Core
+- **React 19.0.0** - Latest React with Server Components
+- **Next.js 16.0.0** - App Router, Static Export
+- **TypeScript 5** - Strict mode enabled
+
+### Styling
+- **Tailwind CSS 4** - Utility-first CSS
+- **Framer Motion 12** - Animation library
+- **class-variance-authority** - Component variants
+- **tailwind-merge + clsx** - ClassName utilities
+
+### UI Primitives
+- **Radix UI** - Accessible component primitives
+- **Lucide React** - Icon library
+- **next-themes** - Dark mode support
+
+### Development
+- **ESLint 9** - Code linting
+- **Prettier 3.6.2** - Code formatting
+- **Husky** - Git hooks
+- **Commitizen** - Conventional commits
+
+## 🎯 Use Cases
+
+- **SaaS Applications**: Build modern SaaS dashboards and interfaces
+- **Landing Pages**: Create stunning landing pages quickly
+- **Admin Dashboards**: Comprehensive admin panel components
+- **E-commerce**: Product cards, checkout flows, shopping carts
+- **Documentation Sites**: Beautiful documentation layouts
+- **Portfolio Sites**: Showcase your work professionally
+- **Marketing Sites**: High-converting marketing pages
+- **Web Apps**: Full-featured web applications
+
+## 🌟 Why Choose Olova UI?
+
+1. **Developer-First**: Built by developers, for developers
+2. **No Vendor Lock-in**: Copy-paste approach means full control
+3. **Production Ready**: Battle-tested in real applications
+4. **Actively Maintained**: Regular updates and new components
+5. **Great Documentation**: Comprehensive docs with live examples
+6. **Performance Focused**: Optimized bundle size and loading
+7. **Accessibility**: WCAG compliant components
+8. **Customizable**: Easy to theme and modify
+9. **Modern Stack**: Latest React, Next.js, and Tailwind
+10. **Free Forever**: MIT License, no hidden costs
+
+## 📊 Performance
+
+- **Lighthouse Score**: 95+ across all metrics
+- **Bundle Size**: Optimized with tree-shaking
+- **Load Time**: < 2s on 3G networks
+- **Core Web Vitals**: Excellent ratings
+- **SEO Score**: 100/100
+
+## 🔧 Configuration
+
+### Tailwind Config
+```js
+// tailwind.config.js
+module.exports = {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      // Olova UI theme extensions
+    },
+  },
+  plugins: [],
+}
+```
+
+### Path Aliases
+```json
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+## 🤝 Contributing
+
+We welcome contributions! See our GitHub repository for guidelines.
+
+## 📄 License
+
+MIT License - Free for personal and commercial use
+
+## 🌍 Made in Bangladesh
+
+Olova UI is proudly the first comprehensive UI library from Bangladesh, built to serve developers worldwide.
+
+## 📞 Support
+
+- GitHub Issues: https://github.com/olova.net/olovaui/issues
+- Documentation: https://olovaui.olova.net/docs
+- Twitter: @olovaui
+
+## 🏆 Recognition
+
+- Featured on GitHub
+- Used by 500+ developers
+- 4.9/5 rating
+- Growing community
+
+---
+
+**Built with ❤️ by Nazmul Hossain in Bangladesh**
+
+Last Updated: November 2025
+Version: 1.0.0

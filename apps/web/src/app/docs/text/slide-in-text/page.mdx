@@ -1,0 +1,84 @@
+export const metadata = {
+    title: 'React Text Animation Components | Olova UI',
+    description: 'A comprehensive collection of animated text components including typewriter, gradient, glitch, morphing, and particle effects. Perfect for dynamic text displays.',
+    keywords: [
+        'React text animation',
+        'animated text components',
+        'typewriter effect',
+        'gradient text',
+        'glitch text',
+        'morphing text',
+        'particle text',
+        'text effects library',
+        'Tailwind CSS text',
+        'Olova UI components'
+    ],
+    openGraph: {
+        title: 'React Text Animation Components - Olova UI',
+        description: 'Comprehensive collection of React animated text components with typewriter, gradient, glitch, and particle effects.',
+        type: 'article',
+        url: '/docs/text',
+        images: [
+          {
+            url: "/og-image.png",
+            width: 1200,
+            height: 630,
+            alt: "Olova UI - Modern React Component Library",
+          },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Text Animation Components - Olova UI',
+        description: 'Comprehensive collection of React animated text components with typewriter, gradient, glitch, and particle effects.',
+        images: ["/og-image.png"]
+    },
+    alternates: {
+        canonical: '/docs/text',
+    },
+};
+
+import { SlideInView } from "./index.tsx"
+
+# Slide In Text
+
+A smooth character-by-character slide-in animation that reveals text from left to right with a subtle staggered delay. Perfect for hero sections and attention-grabbing headlines.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<SlideInView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/docs/text/slide-in-text/slide-in-text.tsx" />
+  </TabsContent>
+</Tabs>
+
+# Usage
+
+```tsx
+import Animation from '@/components/Animation/slide-in-text';
+
+export function SlideInView() {
+    return (
+      <div className='text-center'>
+        <Animation slideInView>
+          Simplicity is the ultimate sophistication.
+        </Animation>
+
+        <Animation
+          slideInView
+          charByChar={false}
+          className="mt-8 text-gray-600 text-sm md:text-base"
+          delay={1}
+        >
+          — Leonardo da Vinci
+        </Animation>
+      </div>
+    );
+  }
+```
+

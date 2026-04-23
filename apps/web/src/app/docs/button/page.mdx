@@ -1,0 +1,157 @@
+export const metadata = {
+  title: "Button Component - olova ui",
+  description: "A customizable button component with multiple variants, sizes, and states. Built with Tailwind CSS and fully accessible.",
+  keywords: [
+    "button component",
+    "React button",
+    "UI button",
+    "Tailwind CSS button",
+    "accessible button",
+    "customizable button",
+    "olova ui button"
+  ],
+  openGraph: {
+    title: "Button Component - olova ui",
+    description: "A customizable button component with multiple variants, sizes, and states. Built with Tailwind CSS and fully accessible.",
+    type: "article",
+    url: "/docs/button",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Button Component - olova ui",
+    description: "A customizable button component with multiple variants, sizes, and states. Built with Tailwind CSS and fully accessible.",
+  },
+  alternates: {
+    canonical: "/docs/button",
+  },
+};
+
+# Button
+
+A versatile button component that supports multiple variants, sizes, and states.
+
+## Installation
+
+<PMTabs>
+  <PNPMTabContent>
+    ```bash
+    pnpm dlx shadcn@latest add "https://olovaui.olova.net/registry/button.json"
+    ```
+  </PNPMTabContent>
+  <NPMTabContent>
+    ```bash
+    npx shadcn@latest add "https://olovaui.olova.net/registry/button.json"
+    ```
+  </NPMTabContent>
+  <YarnTabContent>
+     ```bash
+    yarn dlx shadcn@latest add "https://olovaui.olova.net/registry/button.json"
+    ```
+  </YarnTabContent>
+  <BunTabContent>
+     ```bash
+    bunx shadcn@latest add "https://olovaui.olova.net/registry/button.json"
+    ```
+  </BunTabContent>
+</PMTabs>
+
+## Usage
+
+```tsx
+import { Button } from "@/components/ui/button"
+
+export default function Example() {
+  return (
+    <Button variant="default" size="md">
+      Click me
+    </Button>
+  )
+}
+```
+
+## Examples
+
+### Variants
+
+The button component comes with several built-in variants:
+
+- **Default**: The primary button style
+- **Secondary**: A secondary button style
+- **Outline**: An outlined button
+- **Ghost**: A subtle button with no background
+- **Destructive**: For dangerous actions
+
+### Sizes
+
+Available sizes:
+- **sm**: Small button
+- **md**: Default medium size
+- **lg**: Large button
+- **xl**: Extra large button
+
+### States
+
+Buttons support various states:
+- **Default**: Normal interactive state
+- **Loading**: Shows loading spinner
+- **Disabled**: Non-interactive state
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'secondary' \| 'outline' \| 'ghost' \| 'destructive'` | `'default'` | The visual variant of the button |
+| `size` | `'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | The size of the button |
+| `disabled` | `boolean` | `false` | Whether the button is disabled |
+| `loading` | `boolean` | `false` | Whether to show loading state |
+| `children` | `ReactNode` | - | Button content |
+| `onClick` | `() => void` | - | Click handler function |
+
+## Accessibility
+
+The Button component follows WAI-ARIA guidelines:
+
+- Uses semantic `button` element
+- Supports keyboard navigation
+- Provides proper focus management
+- Includes appropriate ARIA attributes when disabled or loading
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<Button>Default Button</Button>
+```
+
+### With Variants
+
+```tsx
+<Button variant="secondary">Secondary</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="destructive">Delete</Button>
+```
+
+### Different Sizes
+
+```tsx
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>
+<Button size="xl">Extra Large</Button>
+```
+
+### Loading State
+
+```tsx
+<Button loading>Loading...</Button>
+```
+
+### Disabled State
+
+```tsx
+<Button disabled>Disabled</Button>
+```

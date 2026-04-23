@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Alert - Olova UI",
+  description: "Display important contextual messages with semantic tone variants.",
+  alternates: {
+    canonical: "/components/alert",
+  },
+};
+
+import AlertDefaultView from "./alert-view";
+
+# Alert
+
+Display important contextual messages with semantic tone variants.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<AlertDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/alert/alert.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Alert } from "@/app/components/alert/alert";
+
+export default function Example() {
+  return <Alert />;
+}
+```

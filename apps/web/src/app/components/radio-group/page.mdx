@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Radio Group - Olova UI",
+  description: "Choose one option from a mutually exclusive set.",
+  alternates: {
+    canonical: "/components/radio-group",
+  },
+};
+
+import RadioGroupDefaultView from "./radio-group-view";
+
+# Radio Group
+
+Choose one option from a mutually exclusive set.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<RadioGroupDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/radio-group/radio-group.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { RadioGroup } from "@/app/components/radio-group/radio-group";
+
+export default function Example() {
+  return <RadioGroup />;
+}
+```

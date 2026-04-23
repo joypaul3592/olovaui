@@ -1,0 +1,81 @@
+export const metadata = {
+  title: "Button Group - Olova UI",
+  description:
+    "A container that groups related buttons together with consistent styling.",
+  alternates: {
+    canonical: "/components/button-group",
+  },
+};
+
+import {
+  ButtonGroupDefaultView,
+  ButtonGroupSeparatedView,
+  ButtonGroupVerticalView,
+} from "./button-group-view";
+
+# Button Group
+
+A container that groups related buttons together with consistent styling.
+
+## Default
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ButtonGroupDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/button-group/button-group.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Button } from "@/app/components/button/button";
+import { ButtonGroup } from "@/app/components/button-group/button-group";
+
+export default function Example() {
+  return (
+    <ButtonGroup aria-label="Formatting options">
+      <Button variant="outline" size="sm">
+        Bold
+      </Button>
+      <Button variant="outline" size="sm">
+        Italic
+      </Button>
+      <Button variant="outline" size="sm">
+        Underline
+      </Button>
+    </ButtonGroup>
+  );
+}
+```
+
+## Examples
+
+### Separated
+
+Use `attached={false}` to add spacing between grouped buttons.
+
+<ButtonGroupSeparatedView />
+
+### Vertical
+
+Use `orientation="vertical"` to stack buttons.
+
+<ButtonGroupVerticalView />
+
+## API Reference
+
+The `ButtonGroup` component renders a `div` with `role="group"`.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction for the group. |
+| `attached` | `boolean` | `true` | Remove gaps and join borders when `true`. |
+| `className` | `string` | `undefined` | Add custom classes. |
+| `aria-label` | `string` | `undefined` | Accessible label for the group when no visible label is present. |

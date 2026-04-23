@@ -1,0 +1,123 @@
+export const metadata = {
+  title: "Drawer - Olova UI",
+  description: "A panel that slides in from the edge of the screen to reveal content or actions.",
+  alternates: {
+    canonical: "/components/drawer",
+  },
+};
+
+import DrawerView, { DrawerBottomView } from "./drawer-view";
+
+# Drawer
+
+A panel that slides in from the edge of the screen to reveal content or actions.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<DrawerView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/drawer/drawer.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Drawer,
+  DrawerAction,
+  DrawerBody,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
+export default function Example() {
+  return (
+    <Drawer>
+      <DrawerTrigger>Open drawer</DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Drawer title</DrawerTitle>
+          <DrawerDescription>
+            Add or edit settings and save when you're done.
+          </DrawerDescription>
+        </DrawerHeader>
+        <DrawerBody className="space-y-4 text-muted-foreground">
+          <p>Drawer content goes here.</p>
+        </DrawerBody>
+        <DrawerFooter>
+          <DrawerClose className="h-9 min-w-[96px] rounded-lg border border-border bg-background px-5 text-sm font-medium text-foreground shadow-sm">
+            Cancel
+          </DrawerClose>
+          <DrawerAction>Save changes</DrawerAction>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+}
+```
+
+## Behavior
+
+Drawers are dismissible by default. Click the backdrop or press Escape to close.
+Set `dismissible={false}` on `Drawer` to keep it open until an action closes it.
+
+## Sides
+
+Use the `side` prop on `DrawerContent` to control where the drawer appears.
+
+```tsx
+<DrawerContent side="left">...</DrawerContent>
+<DrawerContent side="bottom" size="lg">...</DrawerContent>
+```
+
+## Examples
+
+### Right drawer
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<DrawerView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/drawer/drawer-view.tsx" />
+  </TabsContent>
+</Tabs>
+
+### Bottom drawer
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<DrawerBottomView />} reTrigger={true} />
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+The `Drawer` component manages open state and accessibility for drawers.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `open` | `boolean` | `undefined` | Controlled open state. |
+| `defaultOpen` | `boolean` | `false` | Initial open state. |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` | Called when open state changes. |
+| `dismissible` | `boolean` | `true` | Close on Escape or backdrop click. |
+
+The `DrawerContent` supports `side`, `size`, and `overlayClassName` for layout control.

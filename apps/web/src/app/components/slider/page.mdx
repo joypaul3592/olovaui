@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Slider - Olova UI",
+  description: "Select a value range with a draggable thumb.",
+  alternates: {
+    canonical: "/components/slider",
+  },
+};
+
+import SliderDefaultView from "./slider-view";
+
+# Slider
+
+Select a value range with a draggable thumb.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<SliderDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/slider/slider.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Slider } from "@/app/components/slider/slider";
+
+export default function Example() {
+  return <Slider />;
+}
+```

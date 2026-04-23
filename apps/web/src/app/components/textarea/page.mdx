@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Textarea - Olova UI",
+  description: "Collect multi-line text with controlled resizing.",
+  alternates: {
+    canonical: "/components/textarea",
+  },
+};
+
+import TextareaDefaultView from "./textarea-view";
+
+# Textarea
+
+Collect multi-line text with controlled resizing.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<TextareaDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/textarea/textarea.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Textarea } from "@/app/components/textarea/textarea";
+
+export default function Example() {
+  return <Textarea />;
+}
+```

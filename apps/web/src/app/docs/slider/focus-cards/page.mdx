@@ -1,0 +1,58 @@
+export const metadata = {
+  title: 'Cinematic Slider Component | Olova UI',
+  description: 'A Raycast-inspired horizontal slider with strict snappy navigation and premium dark aesthetics.',
+  keywords: [
+    'React slider',
+    'raycast style',
+    'framer motion slider',
+    'horizontal scroll',
+    'snap slider'
+  ],
+  openGraph: {
+    title: 'Cinematic Slider Component - Olova UI',
+    description: 'A Raycast-inspired horizontal slider with strict snappy navigation.',
+    type: 'article',
+    url: '/docs/slider/focus-cards',
+  },
+  alternates: {
+    canonical: '/docs/slider/focus-cards',
+  },
+};
+
+import { FocusCards } from "./index.tsx"
+
+# Cinematic Slider
+
+A premium, horizontal slider inspired by Raycast's interface. It features landscape cards, strict snap-to-item mechanics, and a polished dark aesthetic.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<FocusCards />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/docs/slider/focus-cards/focus-cards.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Features
+
+- **Strict Snapping**: Drags snap precisely to the next or previous item.
+- **Landscape Design**: Optimized for 16:10 or similar landscape content.
+- **Focus Mechanics**: Active items are highlighted and scaled, while inactive ones recede.
+- **Raycast Aesthetic**: Dark mode, glassmorphism, and subtle gradients.
+
+## Usage
+
+```tsx
+import { FocusCards } from '@/components/focus-cards';
+
+export function Page() {
+  return (
+    <FocusCards />
+  );
+}
+```

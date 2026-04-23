@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+# Check for console.log in staged files
+echo "Checking for console.log statements..."
+
+# Get staged files (only .ts, .tsx, .js, .jsx files)
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx|js|jsx)$' || true)
+
+if [ -n "$STAGED_FILES" ]; then
+  # Check for console.log (excluding console.warn and console.error)
+  CONSOLE_LOGS=$(echo "$STAGED_FILES" | xargs grep -n "console\.log" 2>/dev/null || true)
+  
+  if [ -n "$CONSOLE_LOGS" ]; then
+    echo "⚠️  WARNING: Found console.log statements in your code:"
+    echo "$CONSOLE_LOGS"
+    echo ""
+    echo "❌ Commit blocked! Please remove console.log statements before committing."
+    echo "💡 Tip: Use console.warn() or console.error() if you need logging in production."
+    exit 1
+  fi
+fi
+
+# Run linting
+echo "Running ESLint..."
+pnpm run lint
+
+echo "✅ Pre-commit checks passed!"

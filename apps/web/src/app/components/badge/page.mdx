@@ -1,0 +1,76 @@
+export const metadata = {
+  title: "Badge - Olova UI",
+  description:
+    "A compact badge component with variants, sizes, and easy customization.",
+  alternates: {
+    canonical: "/components/badge",
+  },
+};
+
+import {
+  BadgeCustomView,
+  BadgeDefaultView,
+  BadgeSizesView,
+  BadgeVariantsView,
+} from "./badge-view";
+
+# Badge
+
+A compact badge component with variants, sizes, and easy customization.
+
+## Default
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<BadgeDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/badge/badge.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Badge } from "@/app/components/badge/badge";
+
+export default function Example() {
+  return <Badge>New</Badge>;
+}
+```
+
+## Variants
+
+Use the `variant` prop to change the badge style.
+
+<BadgeVariantsView />
+
+## Sizes
+
+Use the `size` prop to adjust the badge size.
+
+<BadgeSizesView />
+
+## Custom Styles
+
+Use `className` to fully customize the badge.
+
+<BadgeCustomView />
+
+```tsx
+<Badge className="rounded-md bg-muted text-foreground">Custom</Badge>
+```
+
+## API Reference
+
+The `Badge` component renders a `span` by default.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "secondary" \| "destructive" \| "outline"` | `"default"` | Visual style of the badge. |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of the badge. |
+| `className` | `string` | `undefined` | Add custom classes. |

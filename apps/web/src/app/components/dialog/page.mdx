@@ -1,0 +1,123 @@
+export const metadata = {
+  title: "Dialog - Olova UI",
+  description:
+    "A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.",
+  alternates: {
+    canonical: "/components/dialog",
+  },
+};
+
+import DialogView, { DialogEditProfileView } from "./dialog-view";
+
+# Dialog
+
+A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<DialogView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/dialog/dialog.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Dialog,
+  DialogAction,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+export default function Example() {
+  return (
+    <Dialog>
+      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Dialog title</DialogTitle>
+          <DialogDescription>
+            Update the settings below and save your changes.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody className="mt-6 space-y-4 text-muted-foreground">
+          <p>Dialog content goes here.</p>
+        </DialogBody>
+        <DialogFooter>
+          <DialogClose className="h-9 min-w-[96px] rounded-lg border border-border bg-background px-5 text-sm font-medium text-foreground shadow-sm">
+            Cancel
+          </DialogClose>
+          <DialogAction>Save changes</DialogAction>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+```
+
+## Behavior
+
+Dialogs are dismissible by default. Click the backdrop or press Escape to close.
+If you want a blocking dialog, pass `dismissible={false}` to the root component.
+
+## Sticky footer
+
+Use `DialogFooter` with `sticky` to keep actions visible while the body scrolls.
+
+```tsx
+<DialogFooter sticky>...</DialogFooter>
+```
+
+## Examples
+
+### Sticky footer
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<DialogView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/dialog/dialog-view.tsx" />
+  </TabsContent>
+</Tabs>
+
+### Edit profile
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<DialogEditProfileView />} reTrigger={true} />
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+The `Dialog` component manages open state and accessibility for dialogs.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `open` | `boolean` | `undefined` | Controlled open state. |
+| `defaultOpen` | `boolean` | `false` | Initial open state. |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` | Called when open state changes. |
+| `dismissible` | `boolean` | `true` | Close on Escape or backdrop click. |
+
+The `DialogContent` supports `size` (`"sm"`, `"default"`, `"lg"`) and `overlayClassName` for customization.

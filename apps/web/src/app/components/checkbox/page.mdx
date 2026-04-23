@@ -1,0 +1,72 @@
+export const metadata = {
+  title: "Checkbox - Olova UI",
+  description:
+    "A flexible checkbox component with sizes and accessible styling.",
+  alternates: {
+    canonical: "/components/checkbox",
+  },
+};
+
+import {
+  CheckboxDefaultView,
+  CheckboxSizesView,
+  CheckboxStatesView,
+} from "./checkbox-view";
+
+# Checkbox
+
+A flexible checkbox component with sizes and accessible styling.
+
+## Default
+
+Use the checkbox to capture boolean choices and list selections.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<CheckboxDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/checkbox/checkbox.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Checkbox } from "@/app/components/checkbox/checkbox";
+
+export default function Example() {
+  return (
+    <label className="flex items-center gap-2 text-sm font-medium">
+      <Checkbox defaultChecked />
+      <span>Enable notifications</span>
+    </label>
+  );
+}
+```
+
+## States
+
+<CheckboxStatesView />
+
+## Sizes
+
+Use the `size` prop for compact or prominent checkboxes.
+
+<CheckboxSizesView />
+
+## API Reference
+
+The `Checkbox` component renders a styled `input[type="checkbox"]`.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Controls the checkbox size. |
+| `className` | `string` | `undefined` | Add custom classes to the input. |
+| `disabled` | `boolean` | `false` | Disables the checkbox and reduces opacity. |
+| `checked` | `boolean` | `undefined` | Controls the checked state when provided. |
+| `defaultChecked` | `boolean` | `undefined` | Sets the initial checked state. |

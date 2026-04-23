@@ -1,0 +1,67 @@
+export const metadata = {
+  title: "Pop In Text Animation | Olova UI",
+  description:
+    "A bouncy pop-in animation that reveals text with a spring effect. Perfect for playful and energetic text displays.",
+  keywords: [
+    "React text animation",
+    "pop in effect",
+    "spring animation",
+    "bouncy text",
+    "Tailwind CSS text",
+    "Olova UI components",
+  ],
+  openGraph: {
+    title: "Pop In Text Animation - Olova UI",
+    description:
+      "Bouncy pop-in animation for React text components with spring effect.",
+    type: "article",
+    url: "/docs/text/pop-in",
+  },
+  alternates: {
+    canonical: "/docs/text/pop-in",
+  },
+};
+
+import { PopInView } from "./index.tsx";
+
+# Pop In
+
+A bouncy pop-in animation that reveals text with a spring effect. Characters or words scale up from zero with an elastic bounce, creating a playful and energetic entrance. Perfect for attention-grabbing headlines and dynamic content.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<PopInView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/docs/text/pop-in/pop-in.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Basic Usage
+
+Import and use the PopIn component with customizable animation properties.
+
+```tsx
+"use client";
+
+import { PopIn } from "@/components/pop-in";
+
+export function PopInView() {
+  return (
+    <div className="text-center">
+      <PopIn
+        delay={100}
+        animateBy="words"
+        onAnimationComplete={() => {}}
+        className="text-2xl md:text-6xl mb-8"
+      >
+        Pop In Animation
+      </PopIn>
+    </div>
+  );
+}
+```

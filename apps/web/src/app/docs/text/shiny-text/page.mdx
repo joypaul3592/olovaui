@@ -1,0 +1,144 @@
+---
+title: Shiny Text
+description: A text component with a shimmering gradient effect that passes through the text.
+---
+
+import { ShinyTextView } from './index.tsx';
+
+# Shiny Text
+
+A beautiful animated text component that creates a shimmering gradient effect passing through the text. Perfect for highlighting important headings, creating eye-catching titles, or adding visual interest to your UI.
+
+## Preview
+
+<ShinyTextView />
+
+## Usage
+
+```tsx
+import { ShinyText } from '@/app/docs/text/shiny-text/shiny-text';
+
+// Basic usage
+<ShinyText>
+  Shiny Text Effect
+</ShinyText>
+
+// Custom speed and colors
+<ShinyText 
+  speed={2}
+  colors={["#FFD700", "rgba(255, 215, 0, 0)", "#FFD700"]}
+>
+  Golden Shine
+</ShinyText>
+
+// Different angle
+<ShinyText 
+  angle={45}
+  colors={["#00C9FF", "rgba(0, 201, 255, 0)", "#00C9FF"]}
+>
+  Diagonal Flow
+</ShinyText>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The text content to display |
+| `className` | `string` | `""` | Additional CSS classes to apply |
+| `style` | `CSSProperties` | `{}` | Inline styles to apply |
+| `speed` | `number` | `3` | Animation speed in seconds |
+| `angle` | `number` | `-45` | Gradient angle in degrees |
+| `colors` | `string[]` | `["#9d9d9d", "rgba(217, 217, 217, 0)", "#9d9d9d"]` | Array of colors for the gradient effect |
+| `disabled` | `boolean` | `false` | Disable the animation effect |
+
+## Examples
+
+### Default Shiny Effect
+
+The default configuration creates a subtle silver shine effect:
+
+```tsx
+<ShinyText className="text-4xl font-bold">
+  Shiny Text Effect
+</ShinyText>
+```
+
+### Golden Shine
+
+Create a luxurious golden shimmer:
+
+```tsx
+<ShinyText 
+  className="text-3xl font-semibold"
+  speed={2}
+  colors={["#FFD700", "rgba(255, 215, 0, 0)", "#FFD700"]}
+>
+  Golden Shine
+</ShinyText>
+```
+
+### Diagonal Flow
+
+Change the angle for a different direction:
+
+```tsx
+<ShinyText 
+  className="text-3xl font-semibold"
+  angle={45}
+  colors={["#00C9FF", "rgba(0, 201, 255, 0)", "#00C9FF"]}
+>
+  Diagonal Flow
+</ShinyText>
+```
+
+### Slow Animation
+
+For a more subtle effect, increase the duration:
+
+```tsx
+<ShinyText 
+  className="text-2xl"
+  speed={6}
+  colors={["#FF6B6B", "rgba(255, 107, 107, 0)", "#FF6B6B"]}
+>
+  Slow Red Glow
+</ShinyText>
+```
+
+### Disabled State
+
+Show static text without animation:
+
+```tsx
+<ShinyText disabled className="text-xl text-gray-500">
+  Disabled State
+</ShinyText>
+```
+
+## Technical Details
+
+The ShinyText component works by:
+
+1. Creating a linear gradient background with the specified colors
+2. Using `background-clip: text` to clip the gradient to the text shape
+3. Animating the background position to create the moving shine effect
+4. Allowing customization of speed, angle, and colors
+
+## Accessibility
+
+When using this component, ensure that:
+
+- The text has sufficient contrast when the animation is not visible
+- Consider providing a `disabled` option for users who prefer reduced motion
+- The text content remains readable at all times during the animation
+
+## Browser Support
+
+This component uses modern CSS features:
+
+- `background-clip: text` (with `-webkit-` prefix)
+- CSS animations
+- CSS custom properties
+
+These are supported in all modern browsers. For older browsers, the text will fall back to a solid color.

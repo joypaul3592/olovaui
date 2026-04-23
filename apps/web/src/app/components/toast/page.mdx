@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Toast - Olova UI",
+  description: "Show ephemeral status updates and user feedback.",
+  alternates: {
+    canonical: "/components/toast",
+  },
+};
+
+import ToastDefaultView from "./toast-view";
+
+# Toast
+
+Show ephemeral status updates and user feedback.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ToastDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/toast/toast.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Toast } from "@/app/components/toast/toast";
+
+export default function Example() {
+  return <Toast />;
+}
+```

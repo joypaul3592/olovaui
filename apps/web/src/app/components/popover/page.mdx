@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Popover - Olova UI",
+  description: "Render compact contextual content anchored to a trigger.",
+  alternates: {
+    canonical: "/components/popover",
+  },
+};
+
+import PopoverDefaultView from "./popover-view";
+
+# Popover
+
+Render compact contextual content anchored to a trigger.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<PopoverDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/popover/popover.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Popover } from "@/app/components/popover/popover";
+
+export default function Example() {
+  return <Popover />;
+}
+```

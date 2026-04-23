@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Tooltip - Olova UI",
+  description: "Provide short explanatory hints on hover or focus.",
+  alternates: {
+    canonical: "/components/tooltip",
+  },
+};
+
+import TooltipDefaultView from "./tooltip-view";
+
+# Tooltip
+
+Provide short explanatory hints on hover or focus.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<TooltipDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/tooltip/tooltip.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Tooltip } from "@/app/components/tooltip/tooltip";
+
+export default function Example() {
+  return <Tooltip />;
+}
+```

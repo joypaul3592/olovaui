@@ -1,0 +1,73 @@
+export const metadata = {
+  title: "Shine Border - Olova UI",
+  description: "Shine Border is an animated background border effect for cards, panels, and feature callouts.",
+  keywords: [
+    "shine border",
+    "animated border",
+    "glow border",
+    "react border animation",
+    "ui effects"
+  ],
+  openGraph: {
+    title: "Shine Border - Olova UI",
+    description: "Animated background border effect with a soft rotating shine.",
+    type: "article",
+    url: "/docs/shine-border",
+  },
+  alternates: {
+    canonical: "/docs/shine-border",
+  },
+};
+
+import { ShineBorderView } from "./index.tsx";
+
+# Shine Border
+
+Shine Border is an animated background border effect. It creates a subtle rotating glow around any container.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ShineBorderView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/docs/shine-border/shine-border.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Basic Usage
+
+```tsx
+import { ShineBorder } from "./shine-border";
+
+export function Example() {
+  return (
+    <div className="relative overflow-hidden rounded-2xl border border-zinc-200 p-8">
+      <ShineBorder borderWidth={2} duration={8} />
+      <div className="relative z-10">Your content here</div>
+    </div>
+  );
+}
+```
+
+## Tips
+
+- Keep the container `relative` with `overflow-hidden` so the border stays clipped.
+- Increase `borderWidth` for thicker borders.
+- Slower `duration` creates a calmer shine.
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `borderWidth` | `number` | `2` | Width of the animated border. |
+| `duration` | `number` | `8` | Animation duration in seconds. |
+| `colorFrom` | `string` | `"#60a5fa"` | Gradient start color. |
+| `colorTo` | `string` | `"#a855f7"` | Gradient end color. |
+| `paused` | `boolean` | `false` | Pause the animation. |
+| `opacity` | `number` | `0.8` | Border opacity. |
+| `className` | `string` | `undefined` | Additional classes for the shine layer. |
+| `style` | `React.CSSProperties` | `undefined` | Inline styles for the shine layer. |

@@ -1,0 +1,64 @@
+export const metadata = {
+  title: "Glow Card - Olova UI",
+  description:
+    "Glow Card is a pointer-reactive border glow effect that creates a soft, premium highlight around dark cards.",
+  keywords: [
+    "glow card",
+    "pointer glow",
+    "react hover effect",
+    "tailwind card effect",
+    "ui effects",
+  ],
+  openGraph: {
+    title: "Glow Card - Olova UI",
+    description:
+      "Pointer-reactive card border glow with soft blur and directional radial highlights.",
+    type: "article",
+    url: "/docs/glow-card",
+  },
+  alternates: {
+    canonical: "/docs/glow-card",
+  },
+};
+
+import { GlowCardView } from "./index.tsx";
+
+# Glow Card
+
+Glow Card creates a pointer-tracking radial border effect with a soft halo and crisp inner highlight. It is useful for premium callouts, feature cards, and spotlight blocks on dark surfaces.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<GlowCardView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/docs/glow-card/glow-card.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Basic Usage
+
+```tsx
+import { GlowCard } from "./glow-card";
+
+export function Example() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-[#07050d] p-8">
+       <GlowCard>
+          <h2>Your Title</h2>
+          <p>Your content here</p>
+        </GlowCard>
+    </div>
+  );
+}
+```
+
+## Tips
+
+- Keep the parent background dark for better glow contrast.
+- Use a subtle always-on border so the card still reads when idle.
+- Pair with gentle typography and spacing so the hover effect remains the focal point.

@@ -1,0 +1,82 @@
+export const metadata = {
+  title: "Button - Olova UI",
+  description:
+    "A versatile button component with variants, loading states, and icon support.",
+  alternates: {
+    canonical: "/components/button",
+  },
+};
+
+import {
+  ButtonDefaultView,
+  ButtonIconView,
+  ButtonLoadingView,
+  ButtonSizesView,
+  ButtonVariantsView,
+} from "./button-view";
+
+# Button
+
+A versatile button component with variants, loading states, and icon support.
+
+## Default
+
+Use the default variant for primary actions.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ButtonDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/button/button.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { ArrowUpRight } from "lucide-react";
+import { Button } from "@/app/components/button/button";
+
+export default function Example() {
+  return (
+    <Button variant="outline" rightIcon={<ArrowUpRight className="h-4 w-4" />}>
+      Button
+    </Button>
+  );
+}
+```
+
+## Variants
+
+Use the `variant` prop to change styles.
+
+<ButtonVariantsView />
+
+## Sizes
+
+Use the `size` prop to change the button size.
+
+<ButtonSizesView />
+
+## Icons
+
+Use `leftIcon`, `rightIcon`, or the `icon` size for icon-only buttons.
+
+<ButtonIconView />
+
+## Loading
+
+Use `isLoading` to show a spinner and disable the button.
+
+<ButtonLoadingView />
+
+```tsx
+<Button isLoading loadingText="Loading">
+  Save changes
+</Button>
+```

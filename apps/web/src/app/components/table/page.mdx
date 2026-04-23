@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Table - Olova UI",
+  description: "Display structured tabular data with readable spacing.",
+  alternates: {
+    canonical: "/components/table",
+  },
+};
+
+import TableDefaultView from "./table-view";
+
+# Table
+
+Display structured tabular data with readable spacing.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<TableDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/table/table.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Table } from "@/app/components/table/table";
+
+export default function Example() {
+  return <Table />;
+}
+```

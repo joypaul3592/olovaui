@@ -1,0 +1,30 @@
+export const metadata = {
+  title: "Command - Olova UI",
+  description: "A command component for search and quick actions.",
+  alternates: {
+    canonical: "/components/command",
+  },
+};
+
+import { CommandDefaultView, CommandEmptyView } from "./command-view";
+
+# Command
+
+A command component for search and quick actions.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<CommandDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/command/command.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Examples
+
+<ComponentRenderer component={<CommandEmptyView />} reTrigger={true} />

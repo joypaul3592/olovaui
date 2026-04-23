@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Toggle - Olova UI",
+  description: "Create pressable on/off button controls.",
+  alternates: {
+    canonical: "/components/toggle",
+  },
+};
+
+import ToggleDefaultView from "./toggle-view";
+
+# Toggle
+
+Create pressable on/off button controls.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ToggleDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/toggle/toggle.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Toggle } from "@/app/components/toggle/toggle";
+
+export default function Example() {
+  return <Toggle />;
+}
+```

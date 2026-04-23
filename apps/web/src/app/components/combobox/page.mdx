@@ -1,0 +1,158 @@
+export const metadata = {
+  title: "Combobox - Olova UI",
+  description: "Autocomplete input with a list of suggestions.",
+  alternates: {
+    canonical: "/components/combobox",
+  },
+};
+
+import {
+  ComboboxBasicView,
+  ComboboxClearView,
+  ComboboxDisabledView,
+  ComboboxMultipleView,
+  ComboboxPopupView,
+} from "./combobox-view";
+
+# Combobox
+
+Autocomplete input with a list of suggestions.
+
+## Preview
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ComboboxBasicView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/combobox/combobox.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/app/components/combobox/combobox";
+
+const frameworks = [
+  { value: "nextjs", label: "Next.js" },
+  { value: "sveltekit", label: "SvelteKit" },
+  { value: "nuxt", label: "Nuxt.js" },
+  { value: "remix", label: "Remix" },
+  { value: "astro", label: "Astro" },
+];
+
+export default function Example() {
+  return (
+    <Combobox>
+      <ComboboxInput placeholder="Select a framework..." />
+      <ComboboxContent>
+        <ComboboxList>
+          <ComboboxEmpty>No results found.</ComboboxEmpty>
+          {frameworks.map((framework) => (
+            <ComboboxItem key={framework.value} value={framework.value}>
+              {framework.label}
+            </ComboboxItem>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
+}
+```
+
+## Examples
+
+### Basic
+
+A simple combobox with a list of frameworks.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ComboboxBasicView />} reTrigger={true} />
+  </TabsContent>
+</Tabs>
+
+### Multiple
+
+A combobox with multiple selection using `multiple` and `ComboboxChips`.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ComboboxMultipleView />} reTrigger={true} />
+  </TabsContent>
+</Tabs>
+
+### Clear Button
+
+Use the `showClear` prop to show a clear button.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ComboboxClearView />} reTrigger={true} />
+  </TabsContent>
+</Tabs>
+
+### Popup
+
+Trigger the combobox from a button by using the `render` prop. Move the `ComboboxInput` inside the `ComboboxContent`.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ComboboxPopupView />} reTrigger={true} />
+  </TabsContent>
+</Tabs>
+
+### Disabled Options
+
+Disable certain options while keeping them visible.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ComboboxDisabledView />} reTrigger={true} />
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+The `Combobox` component handles selection state, filtering, and open state.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string \| string[]` | `undefined` | Controlled selected value(s). |
+| `defaultValue` | `string \| string[]` | `undefined` | Initial selected value(s). |
+| `onValueChange` | `(value: string \| string[]) => void` | `undefined` | Called when selection changes. |
+| `open` | `boolean` | `undefined` | Controlled open state. |
+| `defaultOpen` | `boolean` | `false` | Initial open state. |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` | Called when open state changes. |
+| `multiple` | `boolean` | `false` | Enables multi-select. |
+| `filter` | `(value: string, search: string, label: string) => boolean` | `undefined` | Custom matching logic. |
+| `render` | `(props) => ReactNode` | `undefined` | Render prop for custom trigger elements. |
+
+The `ComboboxInput` supports `showClear` to display a clear button and `containerClassName` to style its wrapper.

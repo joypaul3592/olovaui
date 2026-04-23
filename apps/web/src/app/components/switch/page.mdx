@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Switch - Olova UI",
+  description: "Toggle binary settings with clear on/off states.",
+  alternates: {
+    canonical: "/components/switch",
+  },
+};
+
+import SwitchDefaultView from "./switch-view";
+
+# Switch
+
+Toggle binary settings with clear on/off states.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<SwitchDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/switch/switch.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Switch } from "@/app/components/switch/switch";
+
+export default function Example() {
+  return <Switch />;
+}
+```

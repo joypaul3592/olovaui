@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Date Picker - Olova UI",
+  description: "Select a date with a lightweight interactive control.",
+  alternates: {
+    canonical: "/components/date-picker",
+  },
+};
+
+import DatePickerDefaultView from "./date-picker-view";
+
+# Date Picker
+
+Select a date with a lightweight interactive control.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<DatePickerDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/date-picker/date-picker.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { DatePicker } from "@/app/components/date-picker/date-picker";
+
+export default function Example() {
+  return <DatePicker />;
+}
+```

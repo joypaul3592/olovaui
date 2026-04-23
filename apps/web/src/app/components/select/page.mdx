@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Select - Olova UI",
+  description: "Choose options from a styled select control.",
+  alternates: {
+    canonical: "/components/select",
+  },
+};
+
+import SelectDefaultView from "./select-view";
+
+# Select
+
+Choose options from a styled select control.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<SelectDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/select/select.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Select } from "@/app/components/select/select";
+
+export default function Example() {
+  return <Select />;
+}
+```

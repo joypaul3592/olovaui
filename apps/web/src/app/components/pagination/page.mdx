@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Pagination - Olova UI",
+  description: "Navigate between paged results efficiently.",
+  alternates: {
+    canonical: "/components/pagination",
+  },
+};
+
+import PaginationDefaultView from "./pagination-view";
+
+# Pagination
+
+Navigate between paged results efficiently.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<PaginationDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/pagination/pagination.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Pagination } from "@/app/components/pagination/pagination";
+
+export default function Example() {
+  return <Pagination />;
+}
+```

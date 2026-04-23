@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Toggle Group - Olova UI",
+  description: "Group toggles into single or multiple selection modes.",
+  alternates: {
+    canonical: "/components/toggle-group",
+  },
+};
+
+import ToggleGroupDefaultView from "./toggle-group-view";
+
+# Toggle Group
+
+Group toggles into single or multiple selection modes.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ToggleGroupDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/toggle-group/toggle-group.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { ToggleGroup } from "@/app/components/toggle-group/toggle-group";
+
+export default function Example() {
+  return <ToggleGroup />;
+}
+```

@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Separator - Olova UI",
+  description: "Visually divide related interface sections.",
+  alternates: {
+    canonical: "/components/separator",
+  },
+};
+
+import SeparatorDefaultView from "./separator-view";
+
+# Separator
+
+Visually divide related interface sections.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<SeparatorDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/separator/separator.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Separator } from "@/app/components/separator/separator";
+
+export default function Example() {
+  return <Separator />;
+}
+```

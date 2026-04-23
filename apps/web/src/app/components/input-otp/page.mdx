@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Input OTP - Olova UI",
+  description: "Collect one-time passcodes with segmented input cells.",
+  alternates: {
+    canonical: "/components/input-otp",
+  },
+};
+
+import InputOtpDefaultView from "./input-otp-view";
+
+# Input OTP
+
+Collect one-time passcodes with segmented input cells.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<InputOtpDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/input-otp/input-otp.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { InputOtp } from "@/app/components/input-otp/input-otp";
+
+export default function Example() {
+  return <InputOtp />;
+}
+```

@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Progress - Olova UI",
+  description: "Communicate completion states with animated progress bars.",
+  alternates: {
+    canonical: "/components/progress",
+  },
+};
+
+import ProgressDefaultView from "./progress-view";
+
+# Progress
+
+Communicate completion states with animated progress bars.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<ProgressDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/progress/progress.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Progress } from "@/app/components/progress/progress";
+
+export default function Example() {
+  return <Progress />;
+}
+```

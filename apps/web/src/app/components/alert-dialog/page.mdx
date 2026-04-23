@@ -1,0 +1,97 @@
+export const metadata = {
+  title: "Alert Dialog - Olova UI",
+  description:
+    "A modal dialog that interrupts the user with important content and expects a response.",
+  alternates: {
+    canonical: "/components/alert-dialog",
+  },
+};
+
+import AlertDialogView, { AlertDialogPermissionView } from "./alert-dialog-view";
+
+# Alert Dialog
+
+A modal dialog that interrupts the user with important content and expects a response.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<AlertDialogView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/alert-dialog/alert-dialog.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
+export default function Example() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger>Show Dialog</AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+}
+```
+
+## Behavior
+
+Alert dialogs are designed to require an explicit choice. By default, clicking
+outside the dialog will not dismiss it. If you want to allow dismissal via the
+backdrop or Escape key, pass `dismissible` to the root component.
+
+## Small
+
+Use the `size="sm"` prop to make the alert dialog smaller.
+
+```tsx
+<AlertDialogContent size="sm">
+  ...
+</AlertDialogContent>
+```
+
+## Permission prompt
+
+Use a smaller dialog and concise copy for permission requests.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<AlertDialogPermissionView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/alert-dialog/alert-dialog-view.tsx" />
+  </TabsContent>
+</Tabs>

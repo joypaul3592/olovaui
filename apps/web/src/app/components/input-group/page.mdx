@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Input Group - Olova UI",
+  description: "Compose inputs with addons, prefixes, and action slots.",
+  alternates: {
+    canonical: "/components/input-group",
+  },
+};
+
+import InputGroupDefaultView from "./input-group-view";
+
+# Input Group
+
+Compose inputs with addons, prefixes, and action slots.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<InputGroupDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/input-group/input-group.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { InputGroup } from "@/app/components/input-group/input-group";
+
+export default function Example() {
+  return <InputGroup />;
+}
+```

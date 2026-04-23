@@ -1,0 +1,33 @@
+# Installation
+
+Get started with **Olova UI** — a modern, accessible, and highly customizable React component library.
+
+## Dependencies
+
+To start building with Olova UI, you'll need to install a few essential packages. These provide the styling foundation and interactive capabilities that make our components shine.
+
+### Core Essentials
+These utility packages are the backbone of our styling system, helping with class merging and conflict resolution.
+
+```bash
+npm install tailwindcss clsx tailwind-merge
+```
+
+### Animation (Optional)
+We use Framer Motion to power our specialized animated components like Tabs, Accordions, and Dialogs. It allows for smooth, physics-based transitions that feel natural.
+
+```bash
+npm install framer-motion
+```
+
+### Icons (Optional)
+Lucide React is our chosen icon library, offering a clean and consistent visual style across your application.
+
+```bash
+npm install lucide-react
+```
+
+---
+
+## Ready to Build?
+Once you have these installed, you're all set! Browse our component library, copy the code you need, and start building beautiful user interfaces.

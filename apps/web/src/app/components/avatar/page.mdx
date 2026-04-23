@@ -1,0 +1,58 @@
+export const metadata = {
+  title: "Avatar - Olova UI",
+  description: "An easily stylable avatar component.",
+  alternates: {
+    canonical: "/components/avatar",
+  },
+};
+
+import AvatarView, { AvatarSizesView } from "./avatar-view";
+
+# Avatar
+
+An easily stylable avatar component.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<AvatarView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/avatar/avatar.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Avatar, AvatarFallback, AvatarImage } from "@/app/components/avatar/avatar";
+
+export default function Example() {
+  return (
+    <Avatar>
+      <AvatarImage src="https://olova.net/img/olova.png" alt="Olova UI" />
+      <AvatarFallback>OU</AvatarFallback>
+    </Avatar>
+  );
+}
+```
+
+## Sizes
+
+Use the `size` prop to scale the avatar.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<AvatarSizesView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/avatar/avatar-view.tsx" />
+  </TabsContent>
+</Tabs>

@@ -1,0 +1,71 @@
+export const metadata = {
+  title: 'Rolling Letters Animation | Olova UI',
+  description: 'A smooth rolling animation that reveals text letter by letter from bottom to top. Perfect for dynamic text reveals.',
+  keywords: [
+    'React text animation',
+    'rolling letters',
+    'letter reveal',
+    'Tailwind CSS text',
+    'Olova UI components'
+  ],
+  openGraph: {
+    title: 'Rolling Letters Animation - Olova UI',
+    description: 'Smooth rolling animation for React text components.',
+    type: 'article',
+    url: '/docs/text/rolling-letters',
+  },
+  alternates: {
+    canonical: '/docs/text/rolling-letters',
+  },
+};
+
+import { RollingLettersView } from "./index.tsx"
+
+# Rolling Letters
+
+A smooth rolling animation that reveals text letter by letter from bottom to top. Each character rolls up into view with a smooth easing, creating a dynamic and engaging text reveal effect.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<RollingLettersView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/docs/text/rolling-letters/rolling-letters.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Basic Usage
+
+Import and use the RollingLetters component with customizable animation properties.
+
+```tsx
+import { RollingLetters } from '@/components/rolling-letters';
+
+export function RollingLettersView() {
+  return (
+    <div className='text-center'>
+      <RollingLetters
+        delay={50}
+        className="text-2xl md:text-6xl"
+      >
+        Rolling Letters
+      </RollingLetters>
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| children | `ReactNode` | required | The text content to animate. |
+| delay | `number` | `50` | Delay between each letter animation in ms. |
+| smokey | `boolean` | `true` | Enables the blur and scale "smokey" effect. |
+| threshold | `number` | `0.1` | Intersection observer threshold. |
+| rootMargin | `string` | `'0px'` | Intersection observer root margin. |
+| onAnimationComplete | `() => void` | - | Callback when animation completes. |

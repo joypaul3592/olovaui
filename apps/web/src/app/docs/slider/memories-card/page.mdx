@@ -1,0 +1,66 @@
+export const metadata = {
+  title: 'Memories Card Component | Olova UI',
+  description: 'A Raycast-inspired horizontal slider with strict snappy navigation and premium dark aesthetics.',
+  keywords: [
+    'React slider',
+    'raycast style',
+    'framer motion slider',
+    'horizontal scroll',
+    'snap slider'
+  ],
+  openGraph: {
+    title: 'Memories Card Component - Olova UI',
+    description: 'A Raycast-inspired horizontal slider with strict snappy navigation.',
+    type: 'article',
+    url: '/docs/memories-card',
+  },
+  alternates: {
+    canonical: '/docs/slider/focus-cards',
+  },
+};
+
+import MemoriesCardView from "./memories-card-view"
+
+
+# Memories Card
+
+A premium, interactive card stack component featuring 3D tilt effects, a dynamic "fan" background spread, and smooth swipe-to-next-card functionality. Perfect for showcasing memories, galleries, or highlighted features.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={ <MemoriesCardView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/docs/slider/memories-card/memories-card.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+Step 1: Copy the component code into your project (e.g., at `src/components/olovaui/memories-card.tsx`).
+
+Step 2: Import and use it in your page.
+
+```tsx
+import MemoriesCard from '@/components/olovaui/memories-card';
+
+export default function Page() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-white dark:bg-black">
+      <MemoriesCard />
+    </div>
+  );
+}
+```
+
+## Features
+
+- **3D Perspective Tilt**: Interactive card tilting based on mouse position.
+- **Dynamic Fan Spread**: Background cards fan out beautifully on hover or drag.
+- **Swipe-to-Next**: Intuitive pointer-based swipe interaction to cycle through items.
+- **Auto Mode Ready**: seamlessly supports light and dark themes.
+- **Portable**: Zero-config container logic, fits into any layout.

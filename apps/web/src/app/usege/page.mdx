@@ -1,0 +1,417 @@
+export const metadata = {
+  title: "Usage - Olova UI",
+  description: "Examples of how to use every documentation feature in Olova UI.",
+  openGraph: {
+    title: "Usage - Olova UI",
+    description: "Examples of how to use every documentation feature in Olova UI.",
+    type: "article",
+    url: "/usege",
+  },
+  alternates: {
+    canonical: "/usege",
+  },
+};
+
+# Usage
+
+<div className="docs-usage">
+
+This page showcases the documentation system features and how to use them.
+
+## Callouts
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Output</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <Tip title="Good to Know">
+      When grouping with folders, you can display them as tabs <Underline>using Sidebar Tabs</Underline>.
+    </Tip>
+    <Info title="Info">
+      Use info callouts to highlight supporting details or helpful references.
+    </Info>
+    <Warning title="Warning">
+      Use warnings for breaking changes or steps that can cause issues.
+    </Warning>
+    <Error title="Error">
+      Use errors when something will fail without a required fix.
+    </Error>
+    <Success title="Success">
+      Use success callouts to confirm that a setup step is correct.
+    </Success>
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock
+      lang="mdx"
+      code={`<Tip title="Good to Know">
+  When grouping with folders, you can display them as tabs <Underline>using Sidebar Tabs</Underline>.
+</Tip>
+
+<Info title="Info">
+  Use info callouts to highlight supporting details or helpful references.
+</Info>
+
+<Warning title="Warning">
+  Use warnings for breaking changes or steps that can cause issues.
+</Warning>
+
+<Error title="Error">
+  Use errors when something will fail without a required fix.
+</Error>
+
+<Success title="Success">
+  Use success callouts to confirm that a setup step is correct.
+</Success>`}
+    />
+  </TabsContent>
+</Tabs>
+
+</div>
+
+## Underline Highlight
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Output</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    Use the underline system to emphasize text: <Underline>highlighted text</Underline> or <u>inline underline</u>.
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock
+      lang="mdx"
+      code={`Use the underline system to emphasize text: <Underline>highlighted text</Underline> or <u>inline underline</u>.`}
+    />
+  </TabsContent>
+</Tabs>
+
+## Tabs
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Output</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <Tabs defaultValue="mdx">
+      <TabsList>
+        <TabsTrigger value="mdx">MDX</TabsTrigger>
+        <TabsTrigger value="tsx">TSX</TabsTrigger>
+      </TabsList>
+      <TabsContent value="mdx">
+        <CodeBlock
+          lang="mdx"
+          code={`<Tip title="Good to Know">
+  This is a tip callout.
+</Tip>`}
+        />
+      </TabsContent>
+      <TabsContent value="tsx">
+        <CodeBlock lang="tsx" code={`<Underline>Underline example</Underline>`} />
+      </TabsContent>
+    </Tabs>
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock
+      lang="mdx"
+      code={`<Tabs defaultValue="mdx">
+  <TabsList>
+    <TabsTrigger value="mdx">MDX</TabsTrigger>
+    <TabsTrigger value="tsx">TSX</TabsTrigger>
+  </TabsList>
+  <TabsContent value="mdx">
+    <CodeBlock
+      lang="mdx"
+      code={\`<Tip title="Good to Know">\n  This is a tip callout.\n</Tip>\`}
+    />
+  </TabsContent>
+  <TabsContent value="tsx">
+    <CodeBlock lang="tsx" code={\`<Underline>Underline example</Underline>\`} />
+  </TabsContent>
+</Tabs>`}
+    />
+  </TabsContent>
+</Tabs>
+
+## Code Blocks
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Output</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <CodeBlock
+      lang="tsx"
+      code={`import { BorderBeam } from "@/components/ui";
+
+export function Example() {
+  return (
+    <div className="relative overflow-hidden rounded-2xl border p-8">
+      <BorderBeam size={220} duration={12} />
+      <div className="relative z-10">Your content here</div>
+    </div>
+  );
+}`}
+    />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock
+      lang="mdx"
+      code={`<CodeBlock
+  lang="tsx"
+  code={\`import { BorderBeam } from "@/components/ui";
+
+export function Example() {
+  return (
+    <div className="relative overflow-hidden rounded-2xl border p-8">
+      <BorderBeam size={220} duration={12} />
+      <div className="relative z-10">Your content here</div>
+    </div>
+  );
+}\`}
+/>`}
+    />
+  </TabsContent>
+</Tabs>
+
+## Lists & Blockquotes
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Output</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    - Bullet list example
+    - Another item
+    - One more
+
+    1. Numbered list example
+    2. Second item
+    3. Third item
+
+    > This is a blockquote used for emphasizing a short idea.
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock
+      lang="md"
+      code={`- Bullet list example
+- Another item
+- One more
+
+1. Numbered list example
+2. Second item
+3. Third item
+
+> This is a blockquote used for emphasizing a short idea.`}
+    />
+  </TabsContent>
+</Tabs>
+
+## Tables
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Output</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    | Prop | Type | Default | Description |
+    | --- | --- | --- | --- |
+    | `size` | `number` | `50` | Beam size in pixels. |
+    | `duration` | `number` | `6` | Animation duration in seconds. |
+    | `colorFrom` | `string` | `"#ffaa40"` | Gradient start color. |
+    | `colorTo` | `string` | `"#9c40ff"` | Gradient end color. |
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock
+      lang="md"
+      code={`| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| \`size\` | \`number\` | \`50\` | Beam size in pixels. |
+| \`duration\` | \`number\` | \`6\` | Animation duration in seconds. |
+| \`colorFrom\` | \`string\` | \`"#ffaa40"\` | Gradient start color. |
+| \`colorTo\` | \`string\` | \`"#9c40ff"\` | Gradient end color. |`}
+    />
+  </TabsContent>
+</Tabs>
+
+## Badges
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Output</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <Badge variant="info">Info</Badge> <Badge variant="success">Success</Badge>{" "}
+    <Badge variant="warning">Warning</Badge>{" "}
+    <Badge variant="destructive">Error</Badge>
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock
+      lang="mdx"
+      code={`<Badge variant="info">Info</Badge> <Badge variant="success">Success</Badge>{" "}
+<Badge variant="warning">Warning</Badge>{" "}
+<Badge variant="destructive">Error</Badge>`}
+    />
+  </TabsContent>
+</Tabs>
+
+## Progress
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Output</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <Progress value={72} max={100} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock lang="mdx" code={`<Progress value={72} max={100} />`} />
+  </TabsContent>
+</Tabs>
+
+## Stats
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Output</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <Stats
+      data={[
+        { label: "Components", value: "42+" },
+        { label: "Monthly Users", value: "18k", change: 12 },
+        { label: "Avg. Rating", value: "4.9/5", change: 2 },
+      ]}
+    />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock
+      lang="mdx"
+      code={`<Stats
+  data={[
+    { label: "Components", value: "42+" },
+    { label: "Monthly Users", value: "18k", change: 12 },
+    { label: "Avg. Rating", value: "4.9/5", change: 2 },
+  ]}
+/>`}
+    />
+  </TabsContent>
+</Tabs>
+
+## Cards
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Output</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <Card title="Documentation Card" description="Use cards to group content.">
+      <p className="text-sm text-muted-foreground">
+        Cards are great for showcasing steps, explanations, or UI patterns.
+      </p>
+    </Card>
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock
+      lang="mdx"
+      code={`<Card title="Documentation Card" description="Use cards to group content.">
+  <p className="text-sm text-muted-foreground">
+    Cards are great for showcasing steps, explanations, or UI patterns.
+  </p>
+</Card>`}
+    />
+  </TabsContent>
+</Tabs>
+
+## Timeline
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Output</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <Timeline
+      items={[
+        { title: "Install", description: "Add dependencies and configure.", status: "completed" },
+        { title: "Customize", description: "Adjust styles and variants.", status: "current" },
+        { title: "Ship", description: "Publish your documentation.", status: "upcoming" },
+      ]}
+    />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock
+      lang="mdx"
+      code={`<Timeline
+  items={[
+    { title: "Install", description: "Add dependencies and configure.", status: "completed" },
+    { title: "Customize", description: "Adjust styles and variants.", status: "current" },
+    { title: "Ship", description: "Publish your documentation.", status: "upcoming" },
+  ]}
+/>`}
+    />
+  </TabsContent>
+</Tabs>
+
+## Feature Grid
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Output</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <FeatureGrid
+      columns={3}
+      features={[
+        { title: "Callouts", description: "Info, warning, error, success, and tips." },
+        { title: "Tables", description: "Readable, styled markdown tables." },
+        { title: "Tabs", description: "Switch between code snippets quickly." },
+        { title: "Cards", description: "Bundle related content into cards." },
+        { title: "Timeline", description: "Show processes or steps visually." },
+        { title: "Underline", description: "Highlight key phrases." },
+      ]}
+    />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock
+      lang="mdx"
+      code={`<FeatureGrid
+  columns={3}
+  features={[
+    { title: "Callouts", description: "Info, warning, error, success, and tips." },
+    { title: "Tables", description: "Readable, styled markdown tables." },
+    { title: "Tabs", description: "Switch between code snippets quickly." },
+    { title: "Cards", description: "Bundle related content into cards." },
+    { title: "Timeline", description: "Show processes or steps visually." },
+    { title: "Underline", description: "Highlight key phrases." },
+  ]}
+/>`}
+    />
+  </TabsContent>
+</Tabs>
+
+## Media Embed
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Output</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <MediaEmbed src="/hero-image.png" type="image" title="Hero preview" />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock lang="mdx" code={`<MediaEmbed src="/hero-image.png" type="image" title="Hero preview" />`} />
+  </TabsContent>
+</Tabs>

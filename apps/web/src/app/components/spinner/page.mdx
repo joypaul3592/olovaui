@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Spinner - Olova UI",
+  description: "Indicate asynchronous loading with motion feedback.",
+  alternates: {
+    canonical: "/components/spinner",
+  },
+};
+
+import SpinnerDefaultView from "./spinner-view";
+
+# Spinner
+
+Indicate asynchronous loading with motion feedback.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<SpinnerDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/spinner/spinner.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Spinner } from "@/app/components/spinner/spinner";
+
+export default function Example() {
+  return <Spinner />;
+}
+```

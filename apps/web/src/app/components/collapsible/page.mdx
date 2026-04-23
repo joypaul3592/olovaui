@@ -1,0 +1,102 @@
+export const metadata = {
+  title: "Collapsible - Olova UI",
+  description: "An interactive component which expands/collapses a panel.",
+  alternates: {
+    canonical: "/components/collapsible",
+  },
+};
+
+import CollapsibleDefaultView, { CollapsibleControlledView } from "./collapsible-view";
+
+# Collapsible
+
+An interactive component which expands/collapses a panel.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<CollapsibleDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/collapsible/collapsible.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/app/components/collapsible/collapsible";
+
+export default function Example() {
+  return (
+    <Collapsible defaultOpen>
+      <CollapsibleTrigger>Weekly status update</CollapsibleTrigger>
+      <CollapsibleContent>
+        Highlights, metrics, and action items are available here.
+      </CollapsibleContent>
+    </Collapsible>
+  );
+}
+```
+
+## Controlled state
+
+Use the `open` and `onOpenChange` props when the state is managed externally.
+
+<CollapsibleControlledView />
+
+```tsx
+import * as React from "react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/app/components/collapsible/collapsible";
+
+export default function Example() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <Collapsible open={open} onOpenChange={setOpen}>
+      <CollapsibleTrigger>Sync preferences</CollapsibleTrigger>
+      <CollapsibleContent>
+        Choose which workspaces to sync and when to update.
+      </CollapsibleContent>
+    </Collapsible>
+  );
+}
+```
+
+## API Reference
+
+The `Collapsible` component renders a `div` that manages disclosure state.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `open` | `boolean` | `undefined` | Controls the open state when provided. |
+| `defaultOpen` | `boolean` | `false` | Sets the initial open state for uncontrolled usage. |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` | Called when the open state changes. |
+| `disabled` | `boolean` | `false` | Prevents toggling and reduces opacity. |
+| `className` | `string` | `undefined` | Add custom classes to the root. |
+
+The `CollapsibleTrigger` component renders a `button` linked to the content region.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `showIcon` | `boolean` | `true` | Toggles the chevron icon. |
+| `icon` | `React.ReactNode` | `undefined` | Custom icon node for the trigger. |
+| `className` | `string` | `undefined` | Add custom classes to the trigger. |
+
+The `CollapsibleContent` component renders the collapsible panel body.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | `string` | `undefined` | Add custom classes to the content container. |
+

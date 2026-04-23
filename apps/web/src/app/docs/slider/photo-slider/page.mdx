@@ -1,0 +1,60 @@
+export const metadata = {
+  title: 'Photo Slider Component | Olova UI',
+  description: 'A minimalist, draggable photo slider with smooth animations, perfect for showcasing image galleries.',
+  keywords: [
+    'React photo slider',
+    'carousel',
+    'draggable slider',
+    'framer motion slider',
+    'Olova UI components'
+  ],
+  openGraph: {
+    title: 'Photo Slider Component - Olova UI',
+    description: 'A minimalist, draggable photo slider with smooth animations.',
+    type: 'article',
+    url: '/docs/slider/photo-slider',
+  },
+  alternates: {
+    canonical: '/docs/slider/photo-slider',
+  },
+};
+
+import { PhotoSliderView } from "./index.tsx"
+
+# Photo Slider
+
+A minimalist, responsive, and draggable photo slider component. It enables users to browse through a collection of images with a smooth horizontal dragging interaction.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<PhotoSliderView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/docs/slider/photo-slider/photo-slider.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Features
+
+- **Draggable Interface**: Smooth horizontal dragging with inertia.
+- **Minimalist Design**: Clean black and white aesthetic.
+- **Interactive**: Hover effects reveal saturation and icons.
+- **Responsive**: Adapts to different screen sizes.
+
+## Usage
+
+Simply import the `PhotoSlider` component.
+
+```tsx
+import { PhotoSlider } from '@/components/photo-slider';
+
+export function Page() {
+  return (
+    <PhotoSlider />
+  );
+}
+```

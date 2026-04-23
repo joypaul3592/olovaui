@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Input - Olova UI",
+  description: "Capture single-line text with polished focus behavior.",
+  alternates: {
+    canonical: "/components/input",
+  },
+};
+
+import InputDefaultView from "./input-view";
+
+# Input
+
+Capture single-line text with polished focus behavior.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<InputDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/input/input.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Input } from "@/app/components/input/input";
+
+export default function Example() {
+  return <Input />;
+}
+```

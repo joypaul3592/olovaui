@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Label - Olova UI",
+  description: "Provide accessible form labels with consistent typography.",
+  alternates: {
+    canonical: "/components/label",
+  },
+};
+
+import LabelDefaultView from "./label-view";
+
+# Label
+
+Provide accessible form labels with consistent typography.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<LabelDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/label/label.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Label } from "@/app/components/label/label";
+
+export default function Example() {
+  return <Label />;
+}
+```

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Olova UI">
+  <rect width="256" height="256" rx="48" fill="#00BF63"/>
+  <circle cx="128" cy="128" r="76" fill="#FFFFFF"/>
+  <circle cx="128" cy="128" r="42" fill="#00BF63"/>
+</svg>

@@ -1,0 +1,36 @@
+export const metadata = {
+  title: "Aspect Ratio - Olova UI",
+  description: "Maintain media proportions across responsive containers.",
+  alternates: {
+    canonical: "/components/aspect-ratio",
+  },
+};
+
+import AspectRatioDefaultView from "./aspect-ratio-view";
+
+# Aspect Ratio
+
+Maintain media proportions across responsive containers.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<AspectRatioDefaultView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/components/aspect-ratio/aspect-ratio.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { AspectRatio } from "@/app/components/aspect-ratio/aspect-ratio";
+
+export default function Example() {
+  return <AspectRatio />;
+}
+```
