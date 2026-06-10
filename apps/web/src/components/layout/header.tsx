@@ -53,6 +53,7 @@ const GitHubStarBadge = ({ repo: _repo }: { repo: string }) => {
 const Header = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const isComponentsRoute = pathname?.startsWith("/components");
   const sidebarItems = isComponentsRoute ? componentsNavigation : navigation;
@@ -70,8 +71,19 @@ const Header = () => {
       }
     };
 
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Check initial scroll position
+    handleScroll();
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
@@ -109,7 +121,7 @@ const Header = () => {
         ) : null}
       </div>
 
-      <div className="w-full mx-auto max-w-[1536px] sticky top-0 z-[9998] bg-transparent backdrop-blur-lg border-b border-gray-200 dark:border-zinc-800 border-l border-r border-neutral-200 px-4 md:px-5">
+      <div className={`w-full mx-auto max-w-[1536px] sticky top-0 z-[9998] backdrop-blur-xl border-b border-gray-200/80 dark:border-zinc-800/80 border-l border-r border-neutral-200/80 px-4 md:px-5 transition-all duration-300 ${isScrolled ? 'bg-white/95 dark:bg-zinc-950/95 shadow-md' : 'bg-white/60 dark:bg-zinc-950/60'}`}>
         <header className="h-14 flex items-center justify-between">
           <div className="flex items-center gap-8 md:gap-10">
             <div className="flex items-center gap-3">

@@ -3,7 +3,7 @@ import { Hero } from './components/hero';
 
 export default function App() {
   return (
-    <div className="min-h-screen w-full flex flex-col relative overflow-hidden bg-white dark:bg-[#030403] text-neutral-900 dark:text-white selection:bg-green-500/30 font-sans">
+    <div className="min-h-screen w-full flex flex-col relative bg-white dark:bg-[#030403] text-neutral-900 dark:text-white selection:bg-green-500/30 font-sans">
       <Header />
       {/* In a real project, these styles would go in index.css or tailwind.config.js. 
          Included here for single-file portability as requested.
