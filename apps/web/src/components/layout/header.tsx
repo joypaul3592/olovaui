@@ -36,7 +36,7 @@ const GitHubStarBadge = ({ repo: _repo }: { repo: string }) => {
 
   return (
     <Link
-      href="https://github.com/olovaui/olovaui"
+      href="https://github.com/olovalabs/olovaui"
       target="_blank"
       rel="noopener noreferrer"
       className="flex items-center gap-2 px-3 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
