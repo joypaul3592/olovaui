@@ -116,6 +116,10 @@ export const navigation: NavigationItem[] = [
         label: "Video Accordion",
         href: "/docs/slider/video-accordion",
       },
+      {
+        label: "Momentum Carousel",
+        href: "/docs/slider/momentum-carousel",
+      },
     ],
   },
   {

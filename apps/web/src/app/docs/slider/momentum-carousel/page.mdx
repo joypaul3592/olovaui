@@ -1,0 +1,60 @@
+export const metadata = {
+  title: 'Momentum Carousel Component | Olova UI',
+  description: 'A smooth, unbounded drag carousel with infinite wrapping and momentum physics.',
+  keywords: [
+    'React momentum carousel',
+    'infinite slider',
+    'interactive carousel',
+    'framer motion carousel',
+    'Olova UI components'
+  ],
+  openGraph: {
+    title: 'Momentum Carousel Component - Olova UI',
+    description: 'A smooth, unbounded drag carousel with infinite wrapping and momentum physics.',
+    type: 'article',
+    url: '/docs/slider/momentum-carousel',
+  },
+  alternates: {
+    canonical: '/docs/slider/momentum-carousel',
+  },
+};
+
+import { MomentumCarouselView } from "./index.tsx"
+
+# Momentum Carousel
+
+A smooth, unbounded drag carousel with infinite wrapping and momentum physics. Features buttery smooth GPU-accelerated transforms without React re-renders.
+
+<Tabs defaultValue="preview" className="">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <ComponentRenderer component={<MomentumCarouselView />} reTrigger={true} />
+  </TabsContent>
+  <TabsContent value="code">
+    <CodeBlock filePath="src/app/docs/slider/momentum-carousel/momentum-carousel.tsx" />
+  </TabsContent>
+</Tabs>
+
+## Features
+
+- **Infinite Wrapping**: Draggable surface dynamically wraps items for an unbounded effect.
+- **Momentum Physics**: Utilizes velocity and spring animations for realistic scrolling.
+- **GPU Accelerated**: Smooth performance using Framer Motion transforms.
+- **Responsive Widths**: Adapts card dimensions based on screen size.
+
+## Usage
+
+Simply import the `MomentumCarousel` component into your app.
+
+```tsx
+import MomentumCarousel from '@/components/ui/momentum-carousel';
+
+export function Page() {
+  return (
+    <MomentumCarousel />
+  );
+}
+```
