@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { cloneElement, useCallback, useEffect, useRef, useState } from "react";
 
 // --- Inline SVG Icons ---
 
@@ -280,7 +280,7 @@ export function ComponentRenderer({
             )}
             style={{ minHeight: `${MIN_HEIGHT}px` }}
           >
-            {reTrigger ? <Fragment key={key}>{component}</Fragment> : component}
+            {reTrigger ? cloneElement(component, { key }) : component}
           </div>
 
           {/* Loading overlay */}

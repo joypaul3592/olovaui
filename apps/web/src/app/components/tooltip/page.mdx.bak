@@ -7,7 +7,6 @@ export const metadata = {
 };
 
 import TooltipDefaultView from "./tooltip-view";
-import { ComponentRenderer } from "@/components/layout/component-renderer";
 
 # Tooltip
 
