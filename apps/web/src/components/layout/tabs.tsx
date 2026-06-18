@@ -15,7 +15,7 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "mdx-tabs-list inline-flex h-10 items-center border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 rounded-full p-1 gap-1 shadow-sm",
+      "mdx-tabs-list inline-flex h-10 items-center border border-border bg-muted rounded-full p-1 gap-1 shadow-sm",
       className
     )}
     {...props}
@@ -38,8 +38,8 @@ const TabsTrigger = React.forwardRef<
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:focus-visible:ring-zinc-500 focus-visible:ring-offset-2",
         "rounded-full",
         "cursor-pointer",
-        "data-[state=active]:bg-white dark:data-[state=active]:bg-zinc-950 data-[state=active]:text-zinc-900 dark:data-[state=active]:text-white data-[state=active]:shadow-md",
-        "data-[state=inactive]:bg-transparent data-[state=inactive]:text-zinc-500 dark:data-[state=inactive]:text-zinc-400",
+        "data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-md",
+        "data-[state=inactive]:bg-transparent data-[state=inactive]:text-muted-foreground",
         className
       )}
       {...props}
@@ -58,7 +58,7 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "mdx-tabs-content focus-visible:ring-ring relative mt-2 rounded-lg ring-offset-blue-50 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden border border-zinc-200 dark:border-zinc-700 isolate",
+      "mdx-tabs-content focus-visible:ring-ring relative mt-2 rounded-lg ring-offset-blue-50 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden border border-border isolate",
       className
     )}
     {...props}

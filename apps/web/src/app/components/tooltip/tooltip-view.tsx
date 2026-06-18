@@ -92,7 +92,10 @@ export function TooltipDefaultView() {
     ro.observe(el);
     update(el.offsetWidth);
     const raf = requestAnimationFrame(() => setDefaultIsOpen(true));
-    return () => { ro.disconnect(); cancelAnimationFrame(raf); };
+    return () => {
+      ro.disconnect();
+      cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (

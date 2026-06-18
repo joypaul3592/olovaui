@@ -63,7 +63,7 @@ const SupportAlertBanner = () => {
         }
       `}</style>
       <div
-        className="support-alert-banner sticky top-0 z-40 flex flex-row items-center justify-center px-4 text-center text-sm font-medium bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 relative"
+        className="support-alert-banner sticky top-0 z-40 flex flex-row items-center justify-center px-4 text-center text-sm font-medium bg-background text-foreground relative"
         style={{ height: "3rem" }}
       >
         <div
@@ -97,7 +97,7 @@ const SupportAlertBanner = () => {
           </div>
           <button
             onClick={handleClose}
-            className="p-1 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-full transition-colors duration-200 ml-4"
+            className="p-1 hover:bg-accent rounded-full transition-colors duration-200 ml-4"
             aria-label="Close banner"
           >
             <X className="h-4 w-4" />

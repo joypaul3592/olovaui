@@ -23,7 +23,7 @@ export function GlowCard({
   className = "",
   glowColor = "rgba(255, 182, 255, 0.4)",
   borderGlowColor = "rgba(255, 230, 245, 0.9)",
-  backgroundColor = "#0c0915",
+  backgroundColor,
   borderRadius = "24px",
   maxWidth = "420px",
 }: GlowCardProps) {
@@ -55,7 +55,7 @@ export function GlowCard({
       className={`relative w-full rounded-[${borderRadius}] p-[1.5px] ${className}`}
       style={{ maxWidth }}
     >
-      <div className="absolute inset-0 bg-white/5" style={{ borderRadius }} />
+      <div className="absolute inset-0 bg-black/5 dark:bg-white/5" style={{ borderRadius }} />
 
       <div
         className="absolute inset-0 blur-xl transition-opacity duration-500 ease-in-out"
@@ -84,8 +84,8 @@ export function GlowCard({
       />
 
       <div
-        className="relative z-10 flex h-full w-full flex-col p-8 shadow-2xl"
-        style={{ borderRadius: innerRadius, backgroundColor }}
+        className="relative z-10 flex h-full w-full flex-col p-8 bg-card text-card-foreground"
+        style={{ borderRadius: innerRadius, ...(backgroundColor ? { backgroundColor } : {}) }}
       >
         {children}
       </div>

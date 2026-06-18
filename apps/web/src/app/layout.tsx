@@ -23,7 +23,7 @@ export default function RootLayout({
         <ResourcePreloader />
       </head>
       <body
-        className={`${geistSans.className} ${geistMono.variable} ${geistSans.variable} antialiased min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-normal`}
+        className={`${geistSans.className} ${geistMono.variable} ${geistSans.variable} antialiased min-h-screen font-normal`}
       >
         <Script src="/early-ui-state.js" strategy="beforeInteractive" />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-3B6SP4PBXQ" strategy="afterInteractive" />

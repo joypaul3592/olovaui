@@ -130,9 +130,9 @@ const MenuItem: React.FC<{
           onClick={toggleExpanded}
           className={cn(
             "group/expander cursor-pointer rounded-lg bg-transparent min-h-[34px] py-0 w-full outline-none text-sm px-3 gap-2.5",
-            "flex items-center text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white",
-            "hover:bg-neutral-100 dark:hover:bg-neutral-900", // "neutral-150" -> neutral-100
-            "focus-visible:text-neutral-950 dark:focus-visible:text-white focus-visible:bg-neutral-100 dark:focus-visible:bg-neutral-900"
+            "flex items-center text-muted-foreground hover:text-foreground",
+            "hover:bg-accent",
+            "focus-visible:text-foreground focus-visible:bg-accent"
           )}
         >
           <div className={cn(
@@ -143,7 +143,7 @@ const MenuItem: React.FC<{
             {/* Toggle Icon - Visible by default as requested */}
             <ChevronRight
               className={cn(
-                "shrink-0 w-3.5 h-3.5 text-neutral-500 transition-transform duration-200",
+                "shrink-0 w-3.5 h-3.5 text-muted-foreground transition-transform duration-200",
                 isExpanded && "rotate-90"
               )}
             />
@@ -165,7 +165,7 @@ const MenuItem: React.FC<{
             {/* Key part of the user's design: Nested list needs padding-left and the vertical line */}
             <ul className="relative flex flex-col gap-y-px mx-0 mt-px mb-0 pl-7 pr-0 py-0 list-none">
               {/* Vertical Line */}
-              <div className="absolute left-[19px] inset-y-px w-px bg-neutral-200 dark:bg-neutral-800 z-10"></div>
+              <div className="absolute left-[19px] inset-y-px w-px bg-border z-10"></div>
 
               {item.children?.map((child, idx) => (
                 <li key={idx} className="not-first-of-type:mt-px">
@@ -175,13 +175,13 @@ const MenuItem: React.FC<{
                       "flex items-center gap-2 min-h-[34px] px-3 py-0 outline-none font-medium text-sm rounded-lg text-left transition-colors",
                       "no-underline cursor-pointer", // Reset defaults
                       pathName === child.href
-                        ? "bg-neutral-100 dark:bg-neutral-900 text-neutral-950 dark:text-white" // Active
-                        : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900" // Inactive
+                        ? "bg-accent text-foreground" // Active
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent" // Inactive
                     )}
                   >
                     <span className="truncate">{child.label}</span>
                     {child.badge && (
-                      <span className="inline-flex items-center w-fit whitespace-nowrap flex-none shrink-0 justify-self-start text-[11px]/none font-[550] px-[7px] py-[3px] rounded-full border border-dashed bg-transparent border-neutral-300 dark:border-neutral-700 text-neutral-950 dark:text-white ml-auto">
+                      <span className="inline-flex items-center w-fit whitespace-nowrap flex-none shrink-0 justify-self-start text-[11px]/none font-[550] px-[7px] py-[3px] rounded-full border border-dashed bg-transparent border-border text-foreground ml-auto">
                         {child.badge}
                       </span>
                     )}
@@ -207,7 +207,7 @@ const Sidebar = ({ items = navigation }: { items?: NavigationItem[] }) => {
   const menuData = useMemo(() => transformNavigation(items), [items]);
 
   return (
-    <aside className="hidden md:block w-[260px] h-[calc(100dvh-57px)] sticky top-[57px] border-r border-l border-neutral-200 dark:border-zinc-800 bg-white dark:bg-[#09090b]">
+    <aside className="hidden md:block w-[260px] h-[calc(100dvh-57px)] sticky top-[57px] border-r border-l border-border bg-background">
 
 
       <ScrollArea className="h-full w-full">

@@ -188,19 +188,19 @@ export function ComponentRenderer({
       <div className="absolute right-0 top-[-46px] flex items-center gap-2 z-10">
         {/* Width indicator */}
         {width !== null && (
-          <div className="text-[13px] font-medium text-zinc-400 dark:text-zinc-500 mr-2 flex items-center select-none pointer-events-none">
+          <div className="text-[13px] font-medium text-muted-foreground mr-2 flex items-center select-none pointer-events-none">
             {Math.round(width)}px
           </div>
         )}
-        <div className="flex items-center rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2)] overflow-hidden">
+        <div className="flex items-center rounded-xl border border-border bg-card shadow-sm overflow-hidden">
           {/* Device viewport buttons */}
           <button
             onClick={setDesktop}
             className={cn(
-              "p-2 border-r border-zinc-200 dark:border-zinc-700 transition-colors",
+              "p-2 border-r border-border transition-colors",
               isDesktop
-                ? "text-zinc-800 dark:text-zinc-200 bg-zinc-50 dark:bg-zinc-800"
-                : "text-zinc-400 dark:text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-300",
+                ? "text-foreground bg-accent"
+                : "text-muted-foreground hover:bg-accent hover:text-foreground",
             )}
             title="Desktop view"
           >
@@ -209,10 +209,10 @@ export function ComponentRenderer({
           <button
             onClick={setTablet}
             className={cn(
-              "p-2 border-r border-zinc-200 dark:border-zinc-700 transition-colors",
+              "p-2 border-r border-border transition-colors",
               isTablet
-                ? "text-zinc-800 dark:text-zinc-200 bg-zinc-50 dark:bg-zinc-800"
-                : "text-zinc-400 dark:text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-300",
+                ? "text-foreground bg-accent"
+                : "text-muted-foreground hover:bg-accent hover:text-foreground",
             )}
             title="Tablet view"
           >
@@ -223,8 +223,8 @@ export function ComponentRenderer({
             className={cn(
               "p-2 transition-colors",
               isMobile
-                ? "text-zinc-800 dark:text-zinc-200 bg-zinc-50 dark:bg-zinc-800"
-                : "text-zinc-400 dark:text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-300",
+                ? "text-foreground bg-accent"
+                : "text-muted-foreground hover:bg-accent hover:text-foreground",
             )}
             title="Mobile view"
           >
@@ -238,8 +238,8 @@ export function ComponentRenderer({
             onClick={changeKey}
             disabled={isLoading}
             className={cn(
-              "p-2 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2)] transition-colors",
-              "text-zinc-400 dark:text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-300",
+              "p-2 rounded-xl border border-border bg-card shadow-sm transition-colors",
+              "text-muted-foreground hover:bg-accent hover:text-foreground",
               isLoading && "animate-spin",
             )}
             title="Refresh component"
@@ -257,7 +257,7 @@ export function ComponentRenderer({
       >
         {/* Outer canvas with dashed grid background */}
         <div
-          className="absolute inset-0 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden"
+          className="absolute inset-0 bg-background border border-border rounded-2xl overflow-hidden"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M32 0v32M0 32h32' fill='none' stroke='%23e5e7eb' stroke-dasharray='4 4'/%3e%3c/svg%3e")`,
           }}
@@ -266,7 +266,7 @@ export function ComponentRenderer({
         {/* Resizable inner panel */}
         <div
           className={cn(
-            "absolute left-0 top-0 h-full bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 shadow-[4px_0_16px_rgba(0,0,0,0.03)] dark:shadow-[4px_0_16px_rgba(0,0,0,0.2)] overflow-hidden rounded-l-2xl",
+            "absolute left-0 top-0 h-full bg-background border-r border-border shadow-[4px_0_16px_rgba(0,0,0,0.03)] dark:shadow-[4px_0_16px_rgba(0,0,0,0.2)] overflow-hidden rounded-l-2xl",
             !isDraggingState && "transition-[width] duration-300 ease-in-out",
           )}
           style={{ width: width !== null ? `${width}px` : "100%" }}
@@ -285,8 +285,8 @@ export function ComponentRenderer({
 
           {/* Loading overlay */}
           {isLoading && (
-            <div className="absolute inset-0 bg-white/20 dark:bg-black/20 flex items-center justify-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-zinc-800 dark:border-zinc-200" />
+            <div className="absolute inset-0 bg-background/20 flex items-center justify-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground" />
             </div>
           )}
         </div>
@@ -295,8 +295,8 @@ export function ComponentRenderer({
         {width !== null && (
           <div
             className={cn(
-              "absolute top-1/2 -translate-y-1/2 w-5 h-10 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-md shadow-sm flex items-center justify-center cursor-ew-resize z-20",
-              "text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 hover:border-zinc-300 dark:hover:border-zinc-500",
+              "absolute top-1/2 -translate-y-1/2 w-5 h-10 bg-card border border-border rounded-md shadow-sm flex items-center justify-center cursor-ew-resize z-20",
+              "text-muted-foreground hover:text-foreground hover:border-ring",
               !isDraggingState && "transition-all duration-300 ease-in-out",
               isDraggingState && "transition-colors",
             )}

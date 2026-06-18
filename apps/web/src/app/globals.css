@@ -4,33 +4,54 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* CSS Variables for theming */
+
+/* ── Light Mode ── */
 :root {
+  /* Core surfaces */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.72 0.19 150);
+
+  /* Primary —  default*/
+  --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
+
+  /* Secondary */
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
+
+  /* Muted */
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.45 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+
+  /* Accent */
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
+
+  /* Destructive */
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
+
+  /* Borders & inputs */
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+
+  /* Layout */
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+
+  /* Chart palette */
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
+
+  /* Sidebar */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -39,84 +60,114 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --scrollbar-color: oklch(0.145 0 0 / 20%);
+
+  /* Custom: scrollbar, grid, docs tabs */
+  --scrollbar-color: oklch(0.145 0 0 / 14%);
   --grid-line-color: oklch(0.145 0 0 / 6%);
   --grid-line-color-hero: oklch(0.145 0 0 / 8%);
+
+  /* Docs tabs — light */
   --docs-tabs-list-bg: oklch(0.97 0 0);
-  --docs-tabs-list-border: oklch(0.82 0 0 / 35%);
+  --docs-tabs-list-border: oklch(0.922 0 0 / 60%);
   --docs-tabs-list-shadow: oklch(1 0 0 / 70%);
-  --docs-tabs-trigger-fg: oklch(0.35 0 0);
+  --docs-tabs-trigger-fg: oklch(0.556 0 0);
   --docs-tabs-trigger-active-bg: oklch(1 0 0);
   --docs-tabs-trigger-active-fg: oklch(0.145 0 0);
-  --docs-tabs-trigger-active-shadow: oklch(0.145 0 0 / 14%);
+  --docs-tabs-trigger-active-shadow: oklch(0.145 0 0 / 8%);
   --docs-tabs-content-bg: oklch(1 0 0);
-  --docs-tabs-content-border: oklch(0.82 0 0 / 30%);
-  --docs-tabs-content-shadow: oklch(0.145 0 0 / 8%);
-  --docs-shiki-border: oklch(0.82 0 0 / 30%);
-  --doc-underline-color: oklch(0.82 0.16 85);
+  --docs-tabs-content-border: oklch(0.922 0 0 / 60%);
+  --docs-tabs-content-shadow: oklch(0.145 0 0 / 5%);
+  --docs-shiki-border: oklch(0.922 0 0 / 60%);
+  --doc-underline-color: oklch(0.556 0 0 / 40%);
+
+  /* Range / Slider */
   --range-track: var(--muted);
   --range-thumb: var(--primary);
   --range-thumb-hover: color-mix(in oklch, var(--primary) 85%, var(--foreground));
   --range-thumb-focus-ring: color-mix(in oklch, var(--primary) 30%, transparent);
-  --slider-track-gradient: linear-gradient(
-    90deg,
-    color-mix(in oklch, var(--primary) 92%, var(--foreground)),
-    color-mix(in oklch, var(--primary) 70%, var(--accent)),
-    color-mix(in oklch, var(--destructive) 70%, var(--accent))
-  );
+  --slider-track-gradient: linear-gradient(90deg,
+      color-mix(in oklch, var(--primary) 92%, var(--foreground)),
+      color-mix(in oklch, var(--primary) 70%, var(--accent)),
+      color-mix(in oklch, var(--destructive) 70%, var(--accent)));
   --slider-thumb-bg: var(--background);
   --slider-thumb-border: var(--primary);
   --slider-thumb-shadow: color-mix(in oklch, var(--primary) 35%, transparent);
 }
 
+/* ── Dark Mode ── */
 .dark {
+  /* Core surfaces */
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
+
+  /* Cards & Popovers — same as background for seamless feel */
+  --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
+  --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.78 0.17 150);
+
+  /* Primary — default (near-white in dark, inverted from light) */
+  --primary: oklch(0.985 0 0);
   --primary-foreground: oklch(0.205 0 0);
+
+  /* Secondary */
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
+
+  /* Muted */
   --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.78 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+
+  /* Accent */
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
+
+  /* Destructive — subdued in dark mode for better UX */
+  --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+
+  /* Borders & inputs — solid values, not transparency hacks */
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+
+  /* Chart palette (dark) */
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
+
+  /* Sidebar */
+  --sidebar: oklch(0.17 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.985 0 0);
+  --sidebar-primary-foreground: oklch(0.205 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-  --scrollbar-color: oklch(0.985 0 0 / 20%);
-  --grid-line-color: oklch(0.985 0 0 / 2%);
-  --grid-line-color-hero: oklch(0.985 0 0 / 3%);
-  --docs-tabs-list-bg: oklch(0.2 0.01 260 / 85%);
-  --docs-tabs-list-border: oklch(0.65 0.01 260 / 25%);
-  --docs-tabs-list-shadow: oklch(0.2 0.01 260 / 60%);
-  --docs-tabs-trigger-fg: oklch(0.86 0.01 260 / 80%);
-  --docs-tabs-trigger-active-bg: oklch(0.18 0.01 260 / 95%);
-  --docs-tabs-trigger-active-fg: oklch(0.98 0 0);
-  --docs-tabs-trigger-active-shadow: oklch(0.02 0.01 260 / 55%);
-  --docs-tabs-content-bg: oklch(0.16 0.01 260 / 85%);
-  --docs-tabs-content-border: oklch(0.65 0.01 260 / 25%);
-  --docs-tabs-content-shadow: oklch(0.02 0.01 260 / 60%);
-  --docs-shiki-border: oklch(0.65 0.01 260 / 25%);
-  --doc-underline-color: oklch(0.84 0.14 85);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+
+  /* Custom: scrollbar, grid, docs tabs */
+  --scrollbar-color: oklch(0.985 0 0 / 12%);
+  --grid-line-color: oklch(0.985 0 0 / 4%);
+  --grid-line-color-hero: oklch(0.985 0 0 / 6%);
+
+  /* Docs tabs — dark */
+  --docs-tabs-list-bg: oklch(0.205 0 0 / 80%);
+  --docs-tabs-list-border: oklch(0.269 0 0 / 60%);
+  --docs-tabs-list-shadow: oklch(0.145 0 0 / 50%);
+  --docs-tabs-trigger-fg: oklch(0.708 0 0);
+  --docs-tabs-trigger-active-bg: oklch(0.17 0 0);
+  --docs-tabs-trigger-active-fg: oklch(0.985 0 0);
+  --docs-tabs-trigger-active-shadow: oklch(0 0 0 / 40%);
+  --docs-tabs-content-bg: oklch(0.17 0 0 / 80%);
+  --docs-tabs-content-border: oklch(0.269 0 0 / 60%);
+  --docs-tabs-content-shadow: oklch(0 0 0 / 40%);
+  --docs-shiki-border: oklch(0.269 0 0 / 60%);
+  --doc-underline-color: oklch(0.708 0 0 / 40%);
+
+  /* Range / Slider */
   --range-track: var(--muted);
   --range-thumb: color-mix(in oklch, var(--primary) 90%, var(--foreground));
   --range-thumb-hover: color-mix(in oklch, var(--primary) 75%, var(--foreground));
@@ -126,7 +177,9 @@
   --slider-thumb-shadow: color-mix(in oklch, var(--primary) 45%, transparent);
 }
 
-/* Shiki theme switching */
+/* ============================================
+   Shiki Code Theme Switching
+   ============================================ */
 html:not(.dark) .shiki,
 html:not(.dark) .shiki span {
   color: var(--shiki-light) !important;
@@ -220,6 +273,7 @@ html.dark .shiki span {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -246,29 +300,35 @@ html.dark .shiki span {
   }
 
   .vitepress-table th {
-    @apply px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100;
-    @apply border-b border-r border-gray-200 dark:border-gray-700;
+    @apply px-4 py-3 text-left text-sm font-semibold;
+    color: var(--foreground);
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
   }
 
   .vitepress-table th:last-child {
-    @apply border-r-0;
+    border-right: 0;
   }
 
   .vitepress-table td {
-    @apply px-4 py-3 text-sm text-gray-700 dark:text-gray-300;
-    @apply border-b border-r border-gray-100 dark:border-gray-800;
+    @apply px-4 py-3 text-sm;
+    color: var(--muted-foreground);
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
   }
 
   .vitepress-table td:last-child {
-    @apply border-r-0;
+    border-right: 0;
   }
 
   .vitepress-table tr:hover {
-    @apply bg-gray-50 dark:bg-gray-800/30;
+    background: var(--accent);
   }
 
   .vitepress-table code {
-    @apply font-mono text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-800 dark:text-gray-200;
+    @apply font-mono text-xs px-2 py-1 rounded;
+    background: var(--muted);
+    color: var(--foreground);
   }
 
   /* Line clamp utilities for text truncation */
@@ -346,32 +406,24 @@ html.dark .shiki span {
 /* Grid background with light/dark mode and more visible lines */
 .grid-bg {
   background-image:
-    linear-gradient(
-      to right,
+    linear-gradient(to right,
       var(--grid-line-color) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
+      transparent 1px),
+    linear-gradient(to bottom,
       var(--grid-line-color) 1px,
-      transparent 1px
-    );
+      transparent 1px);
   background-size: 24px 24px;
 }
 
 /* Enhanced grid background for hero sections */
 .grid-bg-hero {
   background-image:
-    linear-gradient(
-      to right,
+    linear-gradient(to right,
       var(--grid-line-color-hero) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
+      transparent 1px),
+    linear-gradient(to bottom,
       var(--grid-line-color-hero) 1px,
-      transparent 1px
-    );
+      transparent 1px);
   background-size: 32px 32px;
 }
 
@@ -536,6 +588,7 @@ input[type="range"]:focus::-moz-range-thumb {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -546,29 +599,35 @@ input[type="range"]:focus::-moz-range-thumb {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-2px);
   }
 }
 
 @keyframes glow {
+
   0%,
   100% {
     box-shadow: 0 0 5px color-mix(in oklch, var(--primary) 50%, transparent);
   }
+
   50% {
     box-shadow:
       0 0 20px color-mix(in oklch, var(--primary) 80%, transparent),
@@ -584,6 +643,7 @@ input[type="range"]:focus::-moz-range-thumb {
   0% {
     background-position: 0% 50%;
   }
+
   100% {
     background-position: 200% 50%;
   }
@@ -595,4 +655,92 @@ input[type="range"]:focus::-moz-range-thumb {
 
 .animate-glow {
   animation: glow 2s ease-in-out infinite;
+}
+
+
+
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-up {
+  animation: hero-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes text-sweep {
+  to {
+    background-position: -600% 0;
+  }
+}
+
+.title-sweep {
+  background-size: 600% 100%;
+  background-position: 0 0;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-sweep 16s linear infinite;
+}
+
+/* Line 1 "Beautiful" — highlight at position 0%, no phase shift needed */
+.title-sweep-1 {
+  background-image: linear-gradient(
+    90deg,
+    #4ade80 0%,
+    currentColor 8.33%,
+    currentColor 91.67%,
+    #4ade80 100%
+  );
+  animation-delay: 0s;
+}
+
+/* Line 2 "Pre-built UI Library" — phase shifted so its highlight
+   arrives ~4.67s after line 1 finishes */
+.title-sweep-2 {
+  background-image: linear-gradient(
+    90deg,
+    currentColor 0%,
+    currentColor 25%,
+    #4ade80 33.33%,
+    currentColor 41.67%,
+    currentColor 100%
+  );
+  animation-delay: -10.5s;
+}
+
+/* Line 3 "for Busy & Smart devs." — phase shifted so its highlight
+   arrives ~4.67s after line 2 finishes */
+.title-sweep-3 {
+  background-image: linear-gradient(
+    90deg,
+    currentColor 0%,
+    currentColor 58.33%,
+    #4ade80 66.67%,
+    currentColor 75%,
+    currentColor 100%
+  );
+  animation-delay: -5s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .title-sweep-1,
+  .title-sweep-2,
+  .title-sweep-3 {
+    animation: none;
+    background-image: none;
+    -webkit-text-fill-color: currentColor;
+  }
 }

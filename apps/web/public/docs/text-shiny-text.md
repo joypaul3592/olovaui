@@ -1,6 +1,6 @@
-# Shiny Text Animation
+# Shiny Text
 
-A stunning animated text component with a shimmering shine effect that creates a metallic, glossy appearance. The effect simulates light reflecting off a surface, giving text a premium, high-end look. Perfect for headlines, titles, and eye-catching text elements that demand attention.
+Shiny Text animates a moving gradient highlight across text. You can control the sweep speed, direction, spread angle, idle delay, and optional yoyo behavior for back-and-forth motion.
 
     Preview
     Code
@@ -8,74 +8,60 @@ A stunning animated text component with a shimmering shine effect that creates a
     } reTrigger={true} />
   code
 
-
 ## Basic Usage
 
-Import and use the ShinyText component with customizable properties. Adjust the duration, colors, and animation timing to match your design requirements.
-
 ```tsx
-"use client"
 
-
-export function ShinyTextView() {
-    return (
-      <div className='text-center'>
-       <ShinyText
-       delay={0}
-       duration={2}
-       shimmerColor="#ffffff"
-       shineColor="#facc15"
-       className="text-2xl md:text-6xl font-bold mb-8"
-       >
-       Shiny Text Effect
-       </ShinyText>
-      </div>
-    );
+export function Example() {
+  return (
+    <ShinyText
+      text="Premium Unlock"
+      speed={1.2}
+      color="#b48600"
+      shineColor="#ffe566"
+    />
+  );
 }
 ```
 
-## Custom Properties
+## Props
 
-Fine-tune the shine effect with various customization options to create unique visual experiences.
+| Prop           | Type                | Default     | Description                                   |
+| :------------- | :------------------ | :---------- | :-------------------------------------------- |
+| `text`         | `string`            | required    | Text content to render with the shine effect. |
+| `disabled`     | `boolean`           | `false`     | Disables animation and keeps text static.     |
+| `speed`        | `number`            | `5`         | Sweep duration in seconds.                    |
+| `className`    | `string`            | `""`        | Additional classes for the text element.      |
+| `color`        | `string`            | `"#4b5563"` | Base text color used in gradient stops.       |
+| `shineColor`   | `string`            | `"#ffffff"` | Highlight color at the center of the sweep.   |
+| `spread`       | `number`            | `120`       | Gradient angle in degrees.                    |
+| `yoyo`         | `boolean`           | `false`     | Reverses the sweep back after each pass.      |
+| `pauseOnHover` | `boolean`           | `false`     | Pauses motion while hovered.                  |
+| `direction`    | `"left" \| "right"` | `"left"`    | Controls sweep direction.                     |
+| `delay`        | `number`            | `0`         | Idle delay in seconds between sweeps.         |
+
+## Direction + Hover Pause
 
 ```tsx
-
 <ShinyText
-  delay={0.5}
-  duration={1.5}
-  shimmerColor="#a78bfa"
-  shineColor="#c084fc"
-  className="text-4xl font-bold"
-  animateBy="words"
->
-  Custom Shine Colors
-</ShinyText>
-
+  text="Hover me to pause"
+  direction="right"
+  pauseOnHover
+  speed={1.5}
+  color="#064e3b"
+  shineColor="#34d399"
+  className="cursor-pointer"
+/>
 ```
 
-## Advanced Configuration
-
-Create sophisticated shiny text effects by combining multiple parameters for unique visual outcomes.
+## Yoyo Sweep
 
 ```tsx
-
-// Golden shine effect
 <ShinyText
-  duration={3}
-  shimmerColor="#fbbf24"
-  shineColor="#f59e0b"
-  className="text-5xl font-black"
->
-  Golden Text
-</ShinyText>
-
-// Neon shine effect
-<ShinyText
-  duration={1.2}
-  shimmerColor="#22d3ee"
-  shineColor="#06b6d4"
-  className="text-4xl font-bold"
->
-  Neon Glow
-</ShinyText>
+  text="Bouncing light ray"
+  yoyo
+  speed={2.5}
+  color="#1e3a8a"
+  shineColor="#60a5fa"
+/>
 ```

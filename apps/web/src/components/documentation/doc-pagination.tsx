@@ -13,9 +13,9 @@ interface DocPaginationProps {
   showKeyboardHints?: boolean;
 }
 
-export function DocPagination({ 
+export function DocPagination({
   showBackToTop = true,
-  showKeyboardHints = true 
+  showKeyboardHints = true,
 }: DocPaginationProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -25,7 +25,9 @@ export function DocPagination({
   useEffect(() => {
     const handleScroll = () => {
       const scrolled = window.scrollY > 400;
-      setShowScrollTop((current) => (current === scrolled ? current : scrolled));
+      setShowScrollTop((current) =>
+        current === scrolled ? current : scrolled,
+      );
     };
 
     handleScroll();
@@ -34,8 +36,19 @@ export function DocPagination({
   }, []);
 
   useEffect(() => {
-    if (previous?.href) router.prefetch(previous.href);
-    if (next?.href) router.prefetch(next.href);
+    if (typeof window !== "undefined") {
+      // schedule prefetch in next tick to avoid firing router actions before initialization
+      setTimeout(() => {
+        try {
+          if (previous?.href && typeof router?.prefetch === "function")
+            router.prefetch(previous.href);
+          if (next?.href && typeof router?.prefetch === "function")
+            router.prefetch(next.href);
+        } catch {
+          // router might not be ready yet; ignore
+        }
+      }, 0);
+    }
   }, [next?.href, previous?.href, router]);
 
   useEffect(() => {
@@ -44,11 +57,19 @@ export function DocPagination({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.altKey && e.key === "ArrowLeft" && previous) {
         e.preventDefault();
-        router.push(previous.href);
+        try {
+          if (typeof router?.push === "function") router.push(previous.href);
+        } catch {
+          // ignore if router not initialized
+        }
       }
       if (e.altKey && e.key === "ArrowRight" && next) {
         e.preventDefault();
-        router.push(next.href);
+        try {
+          if (typeof router?.push === "function") router.push(next.href);
+        } catch {
+          // ignore if router not initialized
+        }
       }
     };
 
@@ -85,7 +106,19 @@ export function DocPagination({
         {showKeyboardHints && (previous || next) && (
           <div className="mb-4 text-center">
             <p className="text-xs text-black/40 dark:text-white/40">
-              Tip: Use <kbd className="px-2 py-1 text-xs font-semibold text-black/60 dark:text-white/60 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded">Alt</kbd> + <kbd className="px-2 py-1 text-xs font-semibold text-black/60 dark:text-white/60 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded">←</kbd> / <kbd className="px-2 py-1 text-xs font-semibold text-black/60 dark:text-white/60 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded">→</kbd> to navigate
+              Tip: Use{" "}
+              <kbd className="px-2 py-1 text-xs font-semibold text-black/60 dark:text-white/60 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded">
+                Alt
+              </kbd>{" "}
+              +{" "}
+              <kbd className="px-2 py-1 text-xs font-semibold text-black/60 dark:text-white/60 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded">
+                ←
+              </kbd>{" "}
+              /{" "}
+              <kbd className="px-2 py-1 text-xs font-semibold text-black/60 dark:text-white/60 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded">
+                →
+              </kbd>{" "}
+              to navigate
             </p>
           </div>
         )}

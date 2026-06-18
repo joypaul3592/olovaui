@@ -36,3 +36,6 @@ npm-debug.log*
 
 # Cursor IDE workspace storage images
 c__Users_*
+
+# .md files 
+Plan.md

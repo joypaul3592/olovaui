@@ -262,7 +262,7 @@ export const SidebarMobile = ({
   const menuData = useMemo(() => transformNavigation(items), [items]);
 
   return (
-    <aside className="w-full h-[calc(100%-60px)] sticky top-[60px] border-t border-border overflow-visible bg-white dark:bg-black">
+    <aside className="w-full h-[calc(100%-60px)] sticky top-[60px] border-t border-border overflow-visible bg-background">
       <ScrollArea className="h-full w-full">
         <div className="py-4 px-4 relative overflow-visible">
           <div className="flex items-center justify-between mb-4">
