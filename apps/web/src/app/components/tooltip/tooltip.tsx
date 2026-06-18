@@ -192,9 +192,14 @@ function Tooltip({
   open,
   onOpenChange,
 }: TooltipProps) {
-  const [internal, setInternal] = useState(defaultOpen);
+  const [internal, setInternal] = useState(false);
   const isControlled = open !== undefined;
   const isOpen = isControlled ? open : internal;
+
+  useEffect(() => {
+    if (defaultOpen && !isControlled) setInternal(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const setOpen = useCallback(
     (next: boolean) => {

@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 import { Button } from "../button/button";
 
-// ── Spec row — numbered index + label on the left, demo triggers on the right
+// ── Spec row
+// Reads layout size from nearest ancestor with data-size="sm|md|lg"
+// set by the ResizeObserver in TooltipDefaultView.
 
 function Row({
   index,
@@ -18,16 +20,46 @@ function Row({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-3 border-t first:border-t-0 first:pt-0 sm:flex-row sm:items-center sm:gap-5 h-12">
-      <div className="flex shrink-0 items-center gap-3 sm:w-52 border-r border-dashed border-border  h-full pl-5">
-        <span className="font-mono text-xs tabular-nums text-muted-foreground/60">
+    <div
+      className="
+      flex flex-col border-t first:border-t-0
+      group-data-[size=md]:flex-row group-data-[size=md]:items-stretch group-data-[size=md]:min-h-12
+      group-data-[size=lg]:flex-row group-data-[size=lg]:items-stretch group-data-[size=lg]:min-h-12
+    "
+    >
+      {/* Label */}
+      <div
+        className="
+        flex shrink-0 items-center gap-2.5 px-4 pt-3 pb-1
+        group-data-[size=md]:py-0 group-data-[size=md]:pl-5 group-data-[size=md]:pr-4 group-data-[size=md]:w-40 group-data-[size=md]:border-r group-data-[size=md]:border-dashed group-data-[size=md]:border-border
+        group-data-[size=lg]:py-0 group-data-[size=lg]:pl-5 group-data-[size=lg]:pr-4 group-data-[size=lg]:w-52 group-data-[size=lg]:border-r group-data-[size=lg]:border-dashed group-data-[size=lg]:border-border
+      "
+      >
+        <span className="font-mono text-[10px] tabular-nums text-muted-foreground/50">
           {index}
         </span>
         <span className="text-sm text-muted-foreground">{label}</span>
       </div>
-      <div className="flex flex-1 flex-wrap items-center gap-2.5">{children}</div>
-      <div className="hidden h-full items-center border-l border-dashed border-border px-5 sm:flex sm:w-[42%]">
-        <code className="font-mono text-xs text-muted-foreground/80">
+
+      {/* Demo buttons */}
+      <div
+        className="
+        flex flex-1 flex-wrap items-center gap-2 px-4 pb-3 pt-1
+        group-data-[size=md]:py-0 group-data-[size=md]:px-5
+        group-data-[size=lg]:py-0 group-data-[size=lg]:px-5
+      "
+      >
+        {children}
+      </div>
+
+      {/* Prop code — lg only */}
+      <div
+        className="
+        hidden
+        group-data-[size=lg]:flex shrink-0 items-center border-l border-dashed border-border px-5 w-[40%]
+      "
+      >
+        <code className="font-mono text-xs text-muted-foreground/60 break-all">
           {prop}
         </code>
       </div>
@@ -36,13 +68,45 @@ function Row({
 }
 
 export function TooltipDefaultView() {
-  // controlled example state
   const [open, setOpen] = useState(false);
+  const [defaultIsOpen, setDefaultIsOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const initialResizeDone = useRef(false);
+
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+
+    const update = (w: number) => {
+      el.setAttribute("data-size", w >= 1024 ? "lg" : w >= 640 ? "md" : "sm");
+    };
+
+    const ro = new ResizeObserver(([entry]) => {
+      update(entry.contentRect.width);
+      if (initialResizeDone.current) {
+        setDefaultIsOpen(false);
+      } else {
+        initialResizeDone.current = true;
+      }
+    });
+    ro.observe(el);
+    update(el.offsetWidth);
+    const raf = requestAnimationFrame(() => setDefaultIsOpen(true));
+    return () => { ro.disconnect(); cancelAnimationFrame(raf); };
+  }, []);
 
   return (
-    <div className="w-full rounded-md border border-border ">
+    <div
+      ref={wrapperRef}
+      data-size="lg"
+      className="group w-full rounded-md border border-border"
+    >
       {/* 01 — Sides: where the tooltip is placed relative to the trigger */}
-      <Row index="01" label="Side" prop={`<TooltipContent side="top | bottom | left | right" />`}>
+      <Row
+        index="01"
+        label="Side"
+        prop={`<TooltipContent side="top | bottom | left | right" />`}
+      >
         <Tooltip>
           <TooltipTrigger>
             <Button
@@ -97,7 +161,11 @@ export function TooltipDefaultView() {
       </Row>
 
       {/* 02 — Alignment: how the tooltip aligns along the trigger edge */}
-      <Row index="02" label="Align" prop={`<TooltipContent align="start | center | end" />`}>
+      <Row
+        index="02"
+        label="Align"
+        prop={`<TooltipContent align="start | center | end" />`}
+      >
         <Tooltip>
           <TooltipTrigger>
             <Button
@@ -145,7 +213,11 @@ export function TooltipDefaultView() {
       </Row>
 
       {/* 03 — Trigger: the interaction that opens the tooltip */}
-      <Row index="03" label="Trigger" prop={`<Tooltip trigger="hover | click | focus | contextMenu" />`}>
+      <Row
+        index="03"
+        label="Trigger"
+        prop={`<Tooltip trigger="hover | click | focus | contextMenu" />`}
+      >
         <Tooltip trigger="hover">
           <TooltipTrigger>
             <Button
@@ -200,7 +272,11 @@ export function TooltipDefaultView() {
       </Row>
 
       {/* 04 — Arrow: toggle the little pointer on the tooltip */}
-      <Row index="04" label="Arrow" prop={`<Tooltip showArrow={true | false} />`}>
+      <Row
+        index="04"
+        label="Arrow"
+        prop={`<Tooltip showArrow={true | false} />`}
+      >
         <Tooltip showArrow>
           <TooltipTrigger>
             <Button
@@ -313,7 +389,11 @@ export function TooltipDefaultView() {
       </Row>
 
       {/* 07 — Controlled: drive open state from outside */}
-      <Row index="07" label="Controlled" prop={`<Tooltip open={open} onOpenChange={setOpen} />`}>
+      <Row
+        index="07"
+        label="Controlled"
+        prop={`<Tooltip open={open} onOpenChange={setOpen} />`}
+      >
         <Tooltip open={open} onOpenChange={setOpen} trigger="hover">
           <TooltipTrigger>
             <Button
@@ -338,7 +418,11 @@ export function TooltipDefaultView() {
       </Row>
 
       {/* 08 — Rich content: tooltips can hold structured markup */}
-      <Row index="08" label="Rich content" prop={`<TooltipContent>{...}</TooltipContent>`}>
+      <Row
+        index="08"
+        label="Rich content"
+        prop={`<TooltipContent>{...}</TooltipContent>`}
+      >
         <Tooltip>
           <TooltipTrigger>
             <Button
@@ -359,7 +443,7 @@ export function TooltipDefaultView() {
           </TooltipContent>
         </Tooltip>
 
-        <Tooltip defaultOpen>
+        <Tooltip open={defaultIsOpen} onOpenChange={setDefaultIsOpen}>
           <TooltipTrigger>
             <Button
               size="xs"
@@ -369,7 +453,7 @@ export function TooltipDefaultView() {
               Default open
             </Button>
           </TooltipTrigger>
-          <TooltipContent>Open on first render</TooltipContent>
+          <TooltipContent side="right">Open on first render</TooltipContent>
         </Tooltip>
       </Row>
     </div>
