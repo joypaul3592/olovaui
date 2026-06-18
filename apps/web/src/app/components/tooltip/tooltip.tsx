@@ -424,37 +424,34 @@ function TooltipContent({
   return createPortal(
     <AnimatePresence>
       {isOpen && (
+        // Outer layer: owns position + fade + slide. It does NOT scale, so the
+        // arrow anchored here stays glued to the trigger throughout the animation.
         <motion.div
           key={tooltipId}
-          id={tooltipId}
-          ref={contentRef}
-          role="tooltip"
-          initial={{ opacity: 0, scale: 0.86, ...ENTER_OFFSET[side] }}
+          initial={{ opacity: 0, ...ENTER_OFFSET[side] }}
           animate={{
             opacity: 1,
-            scale: 1,
             x: 0,
             y: 0,
             transition: {
               default: {
                 type: "spring",
-                stiffness: 420,
-                damping: 22,
-                mass: 0.45,
+                stiffness: 480,
+                damping: 30,
+                mass: 0.5,
               },
               opacity: {
                 type: "tween",
-                duration: 0.13,
+                duration: 0.16,
                 ease: [0.23, 1, 0.32, 1],
               },
             },
           }}
           exit={{
             opacity: 0,
-            scale: 0.9,
             ...EXIT_OFFSET[activeSide],
             transition: {
-              duration: 0.09,
+              duration: 0.12,
               ease: [0.4, 0, 1, 1],
             },
           }}
@@ -463,27 +460,56 @@ function TooltipContent({
             top: pos.top,
             left: pos.left,
             zIndex: 9999,
-            transformOrigin: `${pos.ox} ${pos.oy}`,
             pointerEvents: "none",
-            backgroundColor: color || undefined,
-            ...style,
           }}
-          className={cn(
-            "bg-muted text-popover-foreground max-w-xs wrap-break-word rounded-sm border border-border px-3 py-1.5 text-xs font-medium shadow-md select-none",
-            className,
-          )}
-          {...props}
         >
-          {children}
+          {/* Inner bubble: only this scales, pivoting from the arrow-side edge
+              (transformOrigin), so it grows out of the fixed arrow. */}
+          <motion.div
+            id={tooltipId}
+            ref={contentRef}
+            role="tooltip"
+            initial={{ scale: 0.86 }}
+            animate={{
+              scale: 1,
+              transition: {
+                type: "spring",
+                stiffness: 480,
+                damping: 30,
+                mass: 0.5,
+              },
+            }}
+            exit={{
+              scale: 0.9,
+              transition: {
+                duration: 0.12,
+                ease: [0.4, 0, 1, 1],
+              },
+            }}
+            style={{
+              transformOrigin: `${pos.ox} ${pos.oy}`,
+              backgroundColor: color || undefined,
+              ...style,
+            }}
+            className={cn(
+              "bg-muted text-popover-foreground max-w-xs wrap-break-word rounded-sm border border-border px-3 py-1.5 text-xs font-medium shadow-md select-none",
+              className,
+            )}
+            {...props}
+          >
+            {children}
+          </motion.div>
           {showArrow && (
             <div
               className={cn(
-                "absolute h-2 w-2 rotate-45",
+                "bg-muted border-border absolute h-2 w-2 rotate-45",
                 ARROW[activeSide].pos,
                 ARROW[activeSide].border,
                 arrowAlign,
               )}
-              style={{ backgroundColor: "inherit", borderColor: "inherit" }}
+              style={{
+                backgroundColor: color || undefined,
+              }}
             />
           )}
         </motion.div>
