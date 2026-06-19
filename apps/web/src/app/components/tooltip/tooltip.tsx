@@ -192,14 +192,9 @@ function Tooltip({
   open,
   onOpenChange,
 }: TooltipProps) {
-  const [internal, setInternal] = useState(false);
+  const [internal, setInternal] = useState(defaultOpen);
   const isControlled = open !== undefined;
   const isOpen = isControlled ? open : internal;
-
-  useEffect(() => {
-    if (defaultOpen && !isControlled) setInternal(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const setOpen = useCallback(
     (next: boolean) => {
@@ -351,10 +346,12 @@ function TooltipContent({
     ox: "50%",
     oy: "50%",
     activeSide: side,
+    hidden: false,
   });
 
   useLayoutEffect(() => {
-    if (!isOpen || !triggerRef.current || !contentRef.current) return;
+    if (!mounted || !isOpen || !triggerRef.current || !contentRef.current)
+      return;
 
     let raf = 0;
     let retries = 0;
@@ -374,16 +371,18 @@ function TooltipContent({
           return;
         }
         retries = 0;
-        setPos(
-          getCoords(
-            tr.getBoundingClientRect(),
-            ct.offsetWidth,
-            ct.offsetHeight,
-            side,
-            align,
-            sideOffset,
-          ),
-        );
+        const r = tr.getBoundingClientRect();
+        // Trigger fully scrolled out of the viewport: hide instead of letting
+        // the viewport-clamp pin the tooltip to a window edge.
+        const hidden =
+          r.bottom <= 0 ||
+          r.top >= window.innerHeight ||
+          r.right <= 0 ||
+          r.left >= window.innerWidth;
+        setPos({
+          ...getCoords(r, ct.offsetWidth, ct.offsetHeight, side, align, sideOffset),
+          hidden,
+        });
       });
     };
 
@@ -395,6 +394,17 @@ function TooltipContent({
     const ro = new ResizeObserver(onResize);
     ro.observe(triggerRef.current);
     ro.observe(contentRef.current);
+    // Also observe ancestors: resizing a parent container (e.g. a draggable
+    // split/preview pane) moves the trigger without changing its own size or
+    // firing a window resize, so neither the observers above nor the listeners
+    // below would otherwise fire.
+    for (
+      let el = triggerRef.current.parentElement;
+      el && el !== document.body;
+      el = el.parentElement
+    ) {
+      ro.observe(el);
+    }
     window.addEventListener("resize", onResize);
     window.addEventListener("scroll", onScroll, {
       passive: true,
@@ -407,7 +417,7 @@ function TooltipContent({
       window.removeEventListener("resize", onResize);
       window.removeEventListener("scroll", onScroll, { capture: true });
     };
-  }, [isOpen, side, align, sideOffset, triggerRef, contentRef]);
+  }, [mounted, isOpen, side, align, sideOffset, triggerRef, contentRef]);
 
   const { activeSide } = pos;
   const isVert = activeSide === "top" || activeSide === "bottom";
@@ -466,6 +476,7 @@ function TooltipContent({
             left: pos.left,
             zIndex: 9999,
             pointerEvents: "none",
+            visibility: pos.hidden ? "hidden" : "visible",
           }}
         >
           {/* Inner bubble: only this scales, pivoting from the arrow-side edge

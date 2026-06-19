@@ -1,8 +1,4 @@
 
-<<<<<<< HEAD
-> @olova/ui@0.1.0 lint F:\olovaui\packages\ui
-=======
 > @olova/ui@0.1.0 lint D:\olovaui\packages\ui
->>>>>>> upstream/main
 > eslint .
 

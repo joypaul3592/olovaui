@@ -69,9 +69,7 @@ function Row({
 
 export function TooltipDefaultView() {
   const [open, setOpen] = useState(false);
-  const [defaultIsOpen, setDefaultIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const initialResizeDone = useRef(false);
 
   useEffect(() => {
     const el = wrapperRef.current;
@@ -83,18 +81,11 @@ export function TooltipDefaultView() {
 
     const ro = new ResizeObserver(([entry]) => {
       update(entry.contentRect.width);
-      if (initialResizeDone.current) {
-        setDefaultIsOpen(false);
-      } else {
-        initialResizeDone.current = true;
-      }
     });
     ro.observe(el);
     update(el.offsetWidth);
-    const raf = requestAnimationFrame(() => setDefaultIsOpen(true));
     return () => {
       ro.disconnect();
-      cancelAnimationFrame(raf);
     };
   }, []);
 
@@ -446,7 +437,7 @@ export function TooltipDefaultView() {
           </TooltipContent>
         </Tooltip>
 
-        <Tooltip open={defaultIsOpen} onOpenChange={setDefaultIsOpen}>
+        <Tooltip defaultOpen>
           <TooltipTrigger>
             <Button
               size="xs"
