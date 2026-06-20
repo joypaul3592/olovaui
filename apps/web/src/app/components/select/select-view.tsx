@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState, type ReactNode } from "react";
 import {
   Select,
   SelectTrigger,
@@ -83,264 +83,217 @@ const GlobeIcon = () => (
   </svg>
 );
 
-// ── Spec row
-// Reads layout size from nearest ancestor with data-size="sm|md|lg"
-// set by the ResizeObserver in SelectDefaultView.
+// ── Controlled example (needs its own state)
 
-function Row({
-  index,
-  label,
-  prop,
-  children,
-}: {
-  index: string;
-  label: string;
-  prop: string;
-  children: React.ReactNode;
-}) {
+function ControlledDemo() {
+  const [value, setValue] = useState("react");
   return (
-    <div
-      className="
-      flex flex-col border-t first:border-t-0
-      group-data-[size=md]:flex-row group-data-[size=md]:items-stretch group-data-[size=md]:min-h-16
-      group-data-[size=lg]:flex-row group-data-[size=lg]:items-stretch group-data-[size=lg]:min-h-16
-    "
-    >
-      {/* Label */}
-      <div
-        className="
-        flex shrink-0 items-center gap-2.5 px-4 pt-3 pb-1
-        group-data-[size=md]:py-0 group-data-[size=md]:pl-5 group-data-[size=md]:pr-4 group-data-[size=md]:w-40 group-data-[size=md]:border-r group-data-[size=md]:border-dashed group-data-[size=md]:border-border
-        group-data-[size=lg]:py-0 group-data-[size=lg]:pl-5 group-data-[size=lg]:pr-4 group-data-[size=lg]:w-52 group-data-[size=lg]:border-r group-data-[size=lg]:border-dashed group-data-[size=lg]:border-border
-      "
-      >
-        <span className="font-mono text-[10px] tabular-nums text-muted-foreground/50">
-          {index}
-        </span>
-        <span className="text-sm text-muted-foreground">{label}</span>
+    <div className="flex flex-col items-center gap-3">
+      <div className="w-56">
+        <Select value={value} onValueChange={setValue}>
+          <SelectTrigger>
+            <SelectValue options={frameworks} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItems options={frameworks} />
+          </SelectContent>
+        </Select>
       </div>
-
-      {/* Demo */}
-      <div
-        className="
-        flex flex-1 flex-wrap items-center gap-3 px-4 pb-3 pt-1
-        group-data-[size=md]:py-3 group-data-[size=md]:px-5
-        group-data-[size=lg]:py-3 group-data-[size=lg]:px-5
-      "
-      >
-        {children}
-      </div>
-
-      {/* Prop code — lg only */}
-      <div
-        className="
-        hidden
-        group-data-[size=lg]:flex shrink-0 items-center border-l border-dashed border-border px-5 w-[40%]
-      "
-      >
-        <code className="font-mono text-xs text-muted-foreground/60 break-all">
-          {prop}
-        </code>
-      </div>
+      <span className="text-xs text-muted-foreground">
+        value = <code className="font-mono">{value}</code>
+      </span>
     </div>
   );
 }
 
-export function SelectDefaultView() {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const [controlled, setControlled] = useState("react");
+// ── Examples
 
-  useEffect(() => {
-    const el = wrapperRef.current;
-    if (!el) return;
+interface Example {
+  index: string;
+  label: string;
+  description: string;
+  prop: string;
+  render: () => ReactNode;
+}
 
-    const update = (w: number) => {
-      el.setAttribute("data-size", w >= 1024 ? "lg" : w >= 640 ? "md" : "sm");
-    };
-
-    const ro = new ResizeObserver(([entry]) => {
-      update(entry.contentRect.width);
-    });
-    ro.observe(el);
-    update(el.offsetWidth);
-    return () => {
-      ro.disconnect();
-    };
-  }, []);
-
-  return (
-    <div
-      ref={wrapperRef}
-      data-size="lg"
-      className="group w-full rounded-md border border-border"
-    >
-      {/* 01 — Default: basic composition with SelectItem children */}
-      <Row index="01" label="Default" prop={`<SelectItem value="..." />`}>
-        <div className="w-56">
-          <Select>
-            <SelectTrigger>
-              <SelectValue
-                placeholder="Select a framework"
-                options={frameworks}
-              />
-            </SelectTrigger>
-            <SelectContent>
-              {frameworks.map((f) => (
-                <SelectItem key={f.value} value={f.value}>
-                  {f.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </Row>
-
-      {/* 02 — Array helper: feed options[] instead of children */}
-      <Row index="02" label="Options array" prop={`<SelectItems options={...} />`}>
-        <div className="w-56">
-          <Select defaultValue="next">
-            <SelectTrigger>
-              <SelectValue
-                placeholder="Select a framework"
-                options={frameworks}
-              />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItems options={frameworks} />
-            </SelectContent>
-          </Select>
-        </div>
-      </Row>
-
-      {/* 03 — Searchable: trigger becomes an editable combobox while open */}
-      <Row
-        index="03"
-        label="Searchable"
-        prop={`<SelectTrigger searchable />`}
-      >
-        <div className="w-56">
-          <Select>
-            <SelectTrigger searchable searchPlaceholder="Search timezone…">
-              <SelectValue
-                placeholder="Pick a timezone"
-                options={timezones}
-              />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItems options={timezones} />
-            </SelectContent>
-          </Select>
-        </div>
-      </Row>
-
-      {/* 04 — Descriptions: secondary text alongside each label */}
-      <Row
-        index="04"
-        label="Descriptions"
-        prop={`{ value, label, description }`}
-      >
-        <div className="w-56">
-          <Select defaultValue="pro">
-            <SelectTrigger>
-              <SelectValue placeholder="Choose a plan" options={plans} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItems options={plans} />
-            </SelectContent>
-          </Select>
-        </div>
-      </Row>
-
-      {/* 05 — Disabled options: individual items can be locked */}
-      <Row
-        index="05"
-        label="Disabled options"
-        prop={`{ value, label, disabled: true }`}
-      >
-        <div className="w-56">
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Team size" options={seats} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItems options={seats} />
-            </SelectContent>
-          </Select>
-        </div>
-      </Row>
-
-      {/* 06 — Disabled select: the whole control is non-interactive */}
-      <Row index="06" label="Disabled" prop={`<Select disabled />`}>
-        <div className="w-56">
-          <Select disabled defaultValue="react">
-            <SelectTrigger>
-              <SelectValue options={frameworks} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItems options={frameworks} />
-            </SelectContent>
-          </Select>
-        </div>
-      </Row>
-
-      {/* 07 — Start icon: decorate the trigger with a leading icon */}
-      <Row
-        index="07"
-        label="Start icon"
-        prop={`<SelectTrigger startIcon={...} />`}
-      >
-        <div className="w-56">
-          <Select>
-            <SelectTrigger startIcon={<GlobeIcon />}>
-              <SelectValue placeholder="Region" options={timezones} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItems options={timezones} />
-            </SelectContent>
-          </Select>
-        </div>
-      </Row>
-
-      {/* 08 — Groups: labelled sections with separators */}
-      <Row
-        index="08"
-        label="Groups"
-        prop={`<SelectGroup label="..." /> + <SelectSeparator />`}
-      >
-        <div className="w-56">
-          <Select>
-            <SelectTrigger>
-              <SelectValue
-                placeholder="Pick a food"
-                options={[
-                  { value: "apple", label: "Apple" },
-                  { value: "banana", label: "Banana" },
-                  { value: "carrot", label: "Carrot" },
-                  { value: "potato", label: "Potato" },
-                ]}
-              />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup label="Fruits">
-                <SelectItem value="apple">Apple</SelectItem>
-                <SelectItem value="banana">Banana</SelectItem>
-              </SelectGroup>
-              <SelectSeparator />
-              <SelectGroup label="Vegetables">
-                <SelectItem value="carrot">Carrot</SelectItem>
-                <SelectItem value="potato">Potato</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
-      </Row>
-
-      {/* 09 — Field: label, helper text, and error state */}
-      <Row
-        index="09"
-        label="Field & error"
-        prop={`<SelectField label helperText error />`}
-      >
+const examples: Example[] = [
+  {
+    index: "01",
+    label: "Default",
+    description: "Basic composition with SelectItem children.",
+    prop: `<SelectItem value="..." />`,
+    render: () => (
+      <div className="w-56">
+        <Select>
+          <SelectTrigger>
+            <SelectValue
+              placeholder="Select a framework"
+              options={frameworks}
+            />
+          </SelectTrigger>
+          <SelectContent>
+            {frameworks.map((f) => (
+              <SelectItem key={f.value} value={f.value}>
+                {f.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+    ),
+  },
+  {
+    index: "02",
+    label: "Options array",
+    description: "Feed an options[] array instead of children.",
+    prop: `<SelectItems options={...} />`,
+    render: () => (
+      <div className="w-56">
+        <Select defaultValue="next">
+          <SelectTrigger>
+            <SelectValue
+              placeholder="Select a framework"
+              options={frameworks}
+            />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItems options={frameworks} />
+          </SelectContent>
+        </Select>
+      </div>
+    ),
+  },
+  {
+    index: "03",
+    label: "Searchable",
+    description: "Trigger becomes an editable combobox while open.",
+    prop: `<SelectTrigger searchable />`,
+    render: () => (
+      <div className="w-56">
+        <Select>
+          <SelectTrigger searchable searchPlaceholder="Search timezone…">
+            <SelectValue placeholder="Pick a timezone" options={timezones} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItems options={timezones} />
+          </SelectContent>
+        </Select>
+      </div>
+    ),
+  },
+  {
+    index: "04",
+    label: "Descriptions",
+    description: "Secondary text alongside each label.",
+    prop: `{ value, label, description }`,
+    render: () => (
+      <div className="w-56">
+        <Select defaultValue="pro">
+          <SelectTrigger>
+            <SelectValue placeholder="Choose a plan" options={plans} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItems options={plans} />
+          </SelectContent>
+        </Select>
+      </div>
+    ),
+  },
+  {
+    index: "05",
+    label: "Disabled options",
+    description: "Individual items can be locked.",
+    prop: `{ value, label, disabled: true }`,
+    render: () => (
+      <div className="w-56">
+        <Select>
+          <SelectTrigger>
+            <SelectValue placeholder="Team size" options={seats} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItems options={seats} />
+          </SelectContent>
+        </Select>
+      </div>
+    ),
+  },
+  {
+    index: "06",
+    label: "Disabled",
+    description: "The whole control is non-interactive.",
+    prop: `<Select disabled />`,
+    render: () => (
+      <div className="w-56">
+        <Select disabled defaultValue="react">
+          <SelectTrigger>
+            <SelectValue options={frameworks} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItems options={frameworks} />
+          </SelectContent>
+        </Select>
+      </div>
+    ),
+  },
+  {
+    index: "07",
+    label: "Start icon",
+    description: "Decorate the trigger with a leading icon.",
+    prop: `<SelectTrigger startIcon={...} />`,
+    render: () => (
+      <div className="w-56">
+        <Select>
+          <SelectTrigger startIcon={<GlobeIcon />}>
+            <SelectValue placeholder="Region" options={timezones} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItems options={timezones} />
+          </SelectContent>
+        </Select>
+      </div>
+    ),
+  },
+  {
+    index: "08",
+    label: "Groups",
+    description: "Labelled sections with separators.",
+    prop: `<SelectGroup label="..." /> + <SelectSeparator />`,
+    render: () => (
+      <div className="w-56">
+        <Select>
+          <SelectTrigger>
+            <SelectValue
+              placeholder="Pick a food"
+              options={[
+                { value: "apple", label: "Apple" },
+                { value: "banana", label: "Banana" },
+                { value: "carrot", label: "Carrot" },
+                { value: "potato", label: "Potato" },
+              ]}
+            />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup label="Fruits">
+              <SelectItem value="apple">Apple</SelectItem>
+              <SelectItem value="banana">Banana</SelectItem>
+            </SelectGroup>
+            <SelectSeparator />
+            <SelectGroup label="Vegetables">
+              <SelectItem value="carrot">Carrot</SelectItem>
+              <SelectItem value="potato">Potato</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+    ),
+  },
+  {
+    index: "09",
+    label: "Field & error",
+    description: "Label, helper text, and error state.",
+    prop: `<SelectField label helperText error />`,
+    render: () => (
+      <div className="flex flex-wrap items-start justify-center gap-4">
         <div className="w-56">
           <Select>
             <SelectField
@@ -370,62 +323,116 @@ export function SelectDefaultView() {
             </SelectField>
           </Select>
         </div>
-      </Row>
+      </div>
+    ),
+  },
+  {
+    index: "10",
+    label: "Controlled",
+    description: "Drive the value from outside state.",
+    prop: `<Select value={value} onValueChange={setValue} />`,
+    render: () => <ControlledDemo />,
+  },
+  {
+    index: "11",
+    label: "Custom render",
+    description: "Full control over each row's markup.",
+    prop: `<SelectItems optionRenderer={(o) => ...} />`,
+    render: () => (
+      <div className="w-56">
+        <Select defaultValue="active">
+          <SelectTrigger>
+            <SelectValue placeholder="Status" options={statuses} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItems
+              options={statuses}
+              optionRenderer={(option, isSelected, isHighlighted) => (
+                <div
+                  className={[
+                    "flex items-center gap-2 rounded px-3 py-2 text-sm cursor-pointer transition-colors",
+                    isSelected || isHighlighted ? "bg-muted" : "",
+                  ].join(" ")}
+                >
+                  <span
+                    className="size-2 rounded-full shrink-0"
+                    style={{ backgroundColor: statusColors[option.value] }}
+                  />
+                  <span>{option.label}</span>
+                </div>
+              )}
+            />
+          </SelectContent>
+        </Select>
+      </div>
+    ),
+  },
+];
 
-      {/* 10 — Controlled: drive the value from outside state */}
-      <Row
-        index="10"
-        label="Controlled"
-        prop={`<Select value={value} onValueChange={setValue} />`}
-      >
-        <div className="w-56">
-          <Select value={controlled} onValueChange={setControlled}>
-            <SelectTrigger>
-              <SelectValue options={frameworks} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItems options={frameworks} />
-            </SelectContent>
-          </Select>
-        </div>
-        <span className="text-xs text-muted-foreground">
-          value = <code className="font-mono">{controlled}</code>
-        </span>
-      </Row>
+export function SelectDefaultView() {
+  const [activeIndex, setActiveIndex] = useState(examples[0].index);
+  const active = examples.find((e) => e.index === activeIndex) ?? examples[0];
 
-      {/* 11 — Custom renderer: full control over each row's markup */}
-      <Row
-        index="11"
-        label="Custom render"
-        prop={`<SelectItems optionRenderer={(o) => ...} />`}
-      >
-        <div className="w-56">
-          <Select defaultValue="active">
-            <SelectTrigger>
-              <SelectValue placeholder="Status" options={statuses} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItems
-                options={statuses}
-                optionRenderer={(option, isSelected, isHighlighted) => (
-                  <div
-                    className={[
-                      "flex items-center gap-2 rounded px-3 py-2 text-sm cursor-pointer transition-colors",
-                      isSelected || isHighlighted ? "bg-muted" : "",
-                    ].join(" ")}
-                  >
-                    <span
-                      className="size-2 rounded-full shrink-0"
-                      style={{ backgroundColor: statusColors[option.value] }}
-                    />
-                    <span>{option.label}</span>
-                  </div>
-                )}
-              />
-            </SelectContent>
-          </Select>
+  return (
+    <div className="@container w-full">
+      <div className="flex w-full flex-col overflow-hidden rounded-md border border-border @xl:flex-row">
+        {/* Example list */}
+        <nav
+          aria-label="Examples"
+          className="
+            flex shrink-0 gap-1 overflow-x-auto border-b border-dashed border-border p-2
+            @xl:w-56 @xl:flex-col @xl:overflow-x-visible @xl:border-b-0 @xl:border-r
+          "
+        >
+          {examples.map((ex) => {
+            const isActive = ex.index === active.index;
+            return (
+              <button
+                key={ex.index}
+                type="button"
+                onClick={() => setActiveIndex(ex.index)}
+                aria-current={isActive ? "true" : undefined}
+                className={[
+                  "flex shrink-0 items-center gap-3.5 rounded-md px-3 py-2 text-left text-sm transition-colors cursor-pointer",
+                  isActive
+                    ? "bg-muted text-foreground"
+                    : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
+                ].join(" ")}
+              >
+                <span className="font-mono text-[10px] tabular-nums text-muted-foreground/50">
+                  {ex.index}
+                </span>
+                <span className="whitespace-nowrap">{ex.label}</span>
+              </button>
+            );
+          })}
+        </nav>
+
+        {/* Active example */}
+        <div className="flex min-w-0 flex-1 flex-col">
+          <div className="flex items-baseline gap-2.5 border-b border-dashed border-border px-5 py-3">
+            <span className="font-mono text-sm tabular-nums text-muted-foreground/50">
+              {active.index}
+            </span>
+            <h3 className="text-sm font-medium text-foreground">
+              {active.label}
+            </h3>
+            <p className="ml-auto hidden text-xs text-muted-foreground @md:block">
+              {active.description}
+            </p>
+          </div>
+
+          <div className="flex flex-1 items-center justify-center px-5 py-12">
+            {active.render()}
+          </div>
+
+          <div className="border-t border-dashed border-border px-5 py-3">
+            <code className="font-mono text-xs text-muted-foreground/70 break-all">
+              {active.prop}
+            </code>
+          </div>
         </div>
-      </Row>
+      </div>
     </div>
   );
 }

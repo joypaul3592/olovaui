@@ -105,27 +105,19 @@ interface DropdownStyle {
 
 // ── Constants
 
-const SPACING = 5; // gap between trigger and popup
-const MIN_TOP_PADDING = 5; // min distance from viewport top when flipped
-const MIN_SIDE_PADDING = 8; // min distance from viewport left/right edges
-const OPEN_ANIMATION_MS = 180; // popup reveal duration
-const CLOSE_ANIMATION_MS = 220; // popup dismiss duration + unmount delay (kept equal)
-const DEFAULT_POPUP_WIDTH = 280; // fallback width before the trigger is measured
-const ESTIMATED_POPUP_HEIGHT = 280; // pre-open height guess used to pick a side
-const BASE_Z_INDEX = 9999; // popup stacking outside a dialog
-const MODAL_Z_INDEX = 100000; // popup stacking when rendered inside a dialog
-const SEARCH_FOCUS_DELAY_MS = 60; // delay before focusing the in-list search input
-const CHEVRON_DURATION = 0.15; // chevron morph duration (seconds)
-const TYPEAHEAD_RESET_MS = 500; // idle gap that resets the type-to-select buffer
+const SPACING = 5;
+const MIN_SIDE_PADDING = 8;
+const OPEN_ANIMATION_MS = 180;
+const CLOSE_ANIMATION_MS = 220;
+const DEFAULT_POPUP_WIDTH = 280;
+const ESTIMATED_POPUP_HEIGHT = 280;
+const BASE_Z_INDEX = 9990;
+const MODAL_Z_INDEX = 100000;
+const SEARCH_FOCUS_DELAY_MS = 60;
+const CHEVRON_DURATION = 0.15;
+const TYPEAHEAD_RESET_MS = 500;
 
 // ── Highlight store
-//
-// The "active" option changes on every arrow key, hover, and typeahead match —
-// the hottest piece of state in the component. Keeping it in React state would
-// re-render every consumer (i.e. every option) on each change. Instead it lives
-// in a tiny external store so options subscribe individually and only the two
-// rows whose highlight actually flips re-render. As a bonus, reads via `get()`
-// are always current, so the keyboard handler never sees a stale closure value.
 
 interface HighlightStore {
   subscribe: (cb: () => void) => () => void;
@@ -159,12 +151,6 @@ function useHighlightStore(): HighlightStore {
 }
 
 // ── Context
-//
-// Split into two providers so the option rows are shielded from the churniest
-// state. The main context holds stable callbacks/ids plus the rarely-changing
-// selection + search; the position context holds the per-scroll/per-resize
-// layout values consumed only by the popup itself. Result: scrolling while open
-// repositions the popup without re-rendering any of the options.
 
 interface SelectContextType {
   selectedValue: string;
@@ -228,12 +214,6 @@ function useIsHighlighted(value: string): boolean {
 }
 
 // ── Helpers
-
-/**
- * Decides whether the popup opens below or above the trigger and the resulting
- * top offset. Shared by the pre-open estimate and the post-render measurement
- * so the flip logic lives in exactly one place.
- */
 function resolveVerticalPlacement({
   rect,
   position,
@@ -247,19 +227,13 @@ function resolveVerticalPlacement({
   height: number;
   scrollY: number;
   viewportHeight: number;
-  // When set, skip auto-detection and keep this side. The side is decided once
-  // on open and then locked, so scrolling repositions the popup without ever
-  // flipping it to the other side.
   forced?: Placement;
 }): { top: number; placement: Placement } {
   const isFixed = position === "fixed";
   const bottomPos = rect.bottom + (isFixed ? 0 : scrollY) + SPACING;
   const topPos = isFixed
-    ? Math.max(MIN_TOP_PADDING, rect.top - height - SPACING)
-    : Math.max(
-        scrollY + MIN_TOP_PADDING,
-        rect.top + scrollY - height - SPACING,
-      );
+    ? rect.top - height - SPACING
+    : rect.top + scrollY - height - SPACING;
   const spaceBelow = viewportHeight - (rect.bottom + SPACING);
   const spaceAbove = rect.top - SPACING;
 
@@ -272,11 +246,6 @@ function resolveVerticalPlacement({
     : { top: bottomPos, placement: "bottom" };
 }
 
-/**
- * Keeps the popup inside the viewport horizontally. The popup tracks the
- * trigger's left edge, but a custom width or a trigger near the right edge can
- * push it off-screen, so clamp to the visible band.
- */
 function clampLeft({
   left,
   width,
@@ -306,12 +275,6 @@ function getActualScrollY(): number {
   return window.scrollY;
 }
 
-/**
- * Builds a DOM-safe id for an option element. Option `value`s are arbitrary and
- * may contain spaces or other characters that are illegal in an `id` /
- * `aria-activedescendant` token, so we encode them. The same encoding is used
- * everywhere the id is produced or referenced, so they always match.
- */
 function getOptionId(popupId: string, value: string): string {
   return `${popupId}-opt-${encodeURIComponent(value).replace(/%/g, "_")}`;
 }
@@ -359,8 +322,6 @@ function useOptionDomProps(
     onClick: () => {
       if (!disabled) handleOptionSelect(value);
     },
-    // Hover highlights, but we deliberately don't clear on mouse-leave: doing so
-    // would wipe out a keyboard-set highlight the moment the pointer drifts off.
     onMouseEnter: () => {
       if (!disabled) highlight.set(value);
     },
@@ -368,13 +329,6 @@ function useOptionDomProps(
 }
 
 // ── Shared keyboard navigation
-//
-// One handler for every focusable surface that drives the listbox (the trigger
-// button and any search input), so arrow/Home/End/Enter/Escape behave
-// identically everywhere. `spaceSelects` lets the button select on Space while
-// inputs keep Space as a typed character; `typeahead` enables type-to-select on
-// the non-editable button; `onUnhandled` lets inputs stop propagation for
-// normal typing.
 function useListboxKeyHandler(opts?: {
   spaceSelects?: boolean;
   typeahead?: boolean;
@@ -522,15 +476,13 @@ function Select({
   const portalRef = useRef<HTMLDivElement | null>(null);
   const listboxRef = useRef<HTMLDivElement | null>(null);
 
-  // Pending timers for the open/close lifecycle. Tracked in refs so a quick
-  // re-open can cancel an in-flight close (and vice versa) — otherwise the
-  // deferred close reset fires on the freshly opened popup and tears it down.
+  // Open/close timers kept in refs so a quick re-open can cancel an in-flight close.
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const openRafRef = useRef<number | null>(null);
 
   const highlight = useHighlightStore();
 
-  // Derive selectedValue: controlled when `value` prop is provided, uncontrolled otherwise
+  // Controlled when `value` is passed, uncontrolled otherwise.
   const [internalValue, setInternalValue] = useState(defaultValue ?? "");
   const selectedValue = value !== undefined ? value : internalValue;
 
@@ -547,15 +499,10 @@ function Select({
     zIndex: BASE_Z_INDEX,
   });
 
-  // Refs mirror the latest committed values so the positioning layout effect
-  // can compare against them without listing them as dependencies (which would
-  // make the effect re-trigger itself — a cascading render). Synced in an
-  // effect so we never write to a ref during render.
+  // Mirror committed values so the layout effect can compare without depending on them.
   const dropdownStyleRef = useRef(dropdownStyle);
   const placementRef = useRef(placement);
-  // The chosen side is locked after the first measured layout pass so later
-  // scroll/resize repositions never flip it. Reset to null on each open so the
-  // next open detects fresh.
+  // Side is locked after the first measured pass so scroll/resize never flips it.
   const lockedPlacementRef = useRef<Placement | null>(null);
   useEffect(() => {
     dropdownStyleRef.current = dropdownStyle;
@@ -563,8 +510,7 @@ function Select({
   }, [dropdownStyle, placement]);
 
   const updateSearchQuery = useCallback((q: string) => {
-    // Highlight is reconciled against the filtered DOM by SelectContent's
-    // effect, so we only own the query string here.
+    // Highlight is reconciled against the filtered DOM in SelectContent.
     setSearchQuery(q);
   }, []);
 
@@ -593,8 +539,7 @@ function Select({
       const { rect, left, position, isInModal } = base;
       const scrollY = position === "fixed" ? 0 : getActualScrollY();
       const viewportHeight = window.innerHeight;
-      // Clamp the estimate to whatever space is actually available so a guessed
-      // height never forces an awkward flip; the measured pass corrects it.
+      // Clamp the guessed height to available space; the measured pass corrects it.
       const spaceBelow = viewportHeight - (rect.bottom + SPACING);
       const spaceAbove = rect.top - SPACING;
       const height = Math.min(
@@ -632,10 +577,8 @@ function Select({
     [calculatePositionBase],
   );
 
-  // Measured repositioning — the single source of truth once the popup is on
-  // screen. Always measures the real popup element (not the inner listbox, whose
-  // height excludes the popup's own padding/border); using the wrong height on a
-  // top-placed popup would shift it down onto the trigger as the user scrolls.
+  // Measured repositioning — source of truth once the popup is on screen.
+  // Measures the real popup element so its padding/border counts toward height.
   const applyMeasuredPosition = useCallback(() => {
     if (!portalRef.current || !triggerRef.current) return;
     const popupEl = portalRef.current;
@@ -647,13 +590,12 @@ function Select({
     const { top, placement: decided } = resolveVerticalPlacement({
       rect,
       position,
-      height: popupEl.offsetHeight, // full popup height, incl. padding + border
+      height: popupEl.offsetHeight,
       scrollY,
       viewportHeight: window.innerHeight,
       forced: lockedPlacementRef.current ?? undefined,
     });
-    // Lock the side after this first measured pass — from now on every
-    // reposition reuses it instead of re-detecting.
+    // Lock the side so later repositions reuse it instead of re-detecting.
     lockedPlacementRef.current = decided;
 
     const width = rect.width || popupEl.offsetWidth || DEFAULT_POPUP_WIDTH;
@@ -691,8 +633,7 @@ function Select({
 
   useEffect(() => {
     if (!isOpen) return;
-    // rAF-throttle so a fast scroll/resize coalesces into one reposition per
-    // frame instead of recomputing (and reading layout) on every event.
+    // rAF-throttle so fast scroll/resize coalesces into one reposition per frame.
     let frame = 0;
     const handler = () => {
       if (frame) return;
@@ -715,8 +656,7 @@ function Select({
 
   const openDropdown = useCallback(() => {
     if (disabled) return;
-    // Cancel any in-flight close so a quick re-open isn't torn down by the
-    // previous close's deferred state reset (the open/close race).
+    // Cancel any in-flight close so a quick re-open isn't torn down by it.
     if (closeTimerRef.current !== null) {
       clearTimeout(closeTimerRef.current);
       closeTimerRef.current = null;
@@ -738,8 +678,7 @@ function Select({
   const closeDropdown = useCallback(() => {
     // Already closing — don't stack a second timer.
     if (closeTimerRef.current !== null) return;
-    // Cancel a pending open-reveal frame so it can't flip visibility back on
-    // after we've started closing.
+    // Cancel a pending open-reveal frame so it can't re-show after we start closing.
     if (openRafRef.current !== null) {
       cancelAnimationFrame(openRafRef.current);
       openRafRef.current = null;
@@ -759,8 +698,7 @@ function Select({
     }, CLOSE_ANIMATION_MS);
   }, [highlight]);
 
-  // Flush any pending open/close timers on unmount so they never fire state
-  // updates against a torn-down component.
+  // Flush pending timers on unmount so they don't update a torn-down component.
   useEffect(() => {
     return () => {
       if (closeTimerRef.current !== null) clearTimeout(closeTimerRef.current);
@@ -874,7 +812,7 @@ function SelectLabel({
     >
       {children}
       {(requiredSign || required) && (
-        <span className="ml-1 text-danger" aria-hidden="true">
+        <span className="ml-1 text-destructive" aria-hidden="true">
           *
         </span>
       )}
@@ -925,8 +863,7 @@ const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
     } = useSelectContext();
     const highlightedValue = useHighlightValue();
 
-    // Editable (searchable) combobox: typing falls through to the input;
-    // the button variant selects on Space and supports type-to-select.
+    // Searchable input lets typing through; the button selects on Space + typeahead.
     const handleSearchKeyDown = useListboxKeyHandler({
       onUnhandled: (e) => e.stopPropagation(),
     });
@@ -947,8 +884,7 @@ const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
       handleNavKeyDown(e);
     };
 
-    // The active option drives the screen-reader announcement; it must live on
-    // the focused combobox element, not the (unfocused) listbox.
+    // Active option lives on the focused combobox, not the unfocused listbox.
     const activeDescendant =
       isOpen && highlightedValue
         ? getOptionId(popupId, highlightedValue)
@@ -987,8 +923,7 @@ const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
           </span>
         )}
 
-        {/* Editable combobox is a sibling <input>, never an <input> nested
-            inside a <button> (invalid HTML / broken focus). */}
+        {/* Sibling <input>, never nested in the <button> (invalid HTML). */}
         {isOpen && searchable ? (
           <input
             {...comboboxAria}
@@ -1014,7 +949,7 @@ const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
           </button>
         )}
 
-        {/* Icon slot — animated double-chevron morphs on open */}
+        {/* Animated double-chevron morphs on open */}
         <span className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center pointer-events-none text-muted-foreground">
           {endIcon ? (
             endIcon
@@ -1130,9 +1065,7 @@ function SelectContent({ children, className }: SelectContentProps) {
   const { isVisible, placement, hasCoords, dropdownStyle } =
     useSelectPosition();
 
-  // After the list re-renders for a new query, make sure the active option is
-  // still on screen — otherwise highlight the first match so Enter has a target
-  // and aria-activedescendant never points at a filtered-out row.
+  // After filtering, keep the active option valid — fall back to the first match.
   useEffect(() => {
     if (!isOpen) return;
     const frame = requestAnimationFrame(() => {
@@ -1155,11 +1088,7 @@ function SelectContent({ children, className }: SelectContentProps) {
   )
     return null;
 
-  // Shadcn-style reveal: the popup grows from the edge nearest the trigger and
-  // slides in from that side. When placed on top (opening upward) it enters
-  // from below (+y) and is anchored at its bottom edge; when placed on bottom
-  // it enters from above (-y) and is anchored at its top edge. `isVisible`
-  // drives both the open and close transitions — the popup stays mounted for
+  // Popup slides in from the edge nearest the trigger. Stays mounted for
   // CLOSE_ANIMATION_MS so the exit animation can play before unmount.
   const hidden = {
     opacity: 0,
@@ -1168,8 +1097,6 @@ function SelectContent({ children, className }: SelectContentProps) {
   };
 
   return createPortal(
-    // aria-activedescendant lives on the focused combobox (trigger/search
-    // input), not here — the listbox itself never holds focus.
     <motion.div
       ref={portalRef}
       id={popupId}
@@ -1421,7 +1348,7 @@ function SelectField({
         <p
           id={errorId}
           role="alert"
-          className="text-xs font-medium text-danger"
+          className="text-xs font-medium text-destructive"
         >
           {error}
         </p>
